@@ -1,0 +1,37 @@
+services:
+  web:
+    image: php:8.2-apache
+    container_name: php_web_cuaderno
+    ports:
+      - "666:80"
+    volumes:
+      - ./src:/var/www/html:cached
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db_cuaderno
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cuaderno
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - contenido-php_db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_cuaderno
+    restart: always
+    ports:
+      - "667:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  contenido-php_db_data:
