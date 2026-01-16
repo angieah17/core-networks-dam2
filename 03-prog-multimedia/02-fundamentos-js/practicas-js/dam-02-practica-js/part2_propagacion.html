@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propagación por Defecto</title>
+    <style>
+        #externo {
+            border: 3px solid blue;
+        }
+
+        * {
+            padding: 30px;
+        }
+
+        #medio {
+            border: 3px solid green;
+        }
+
+        #interno{
+            border: 3px solid red;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div id="externo">
+        <div id="medio">
+            <div id="interno">
+                <button id="boton">Click aquí</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const boton = document.getElementById('boton');
+        const interno = document.getElementById('interno');
+        const medio = document.getElementById('medio');
+        const externo = document.getElementById('externo');
+
+        boton.addEventListener('click', () => console.log('Botón'))
+        interno.addEventListener('click', () => console.log('Interno'))
+        medio.addEventListener('click', () => console.log('Medio'))
+        externo.addEventListener('click', () => console.log('Externo'))
+
+        /*En este caso la propgación por defecto es desde lo más interno hasta lo más externo del DOM. 
+        Para detener la propagación:
+        e.stopPropagation después de cada eventListenner. y pasar e como parámetro
+        */
+
+        boton.addEventListener('click', (e) => {
+            console.log('Botón')
+            e.stopPropagation();
+        })
+
+
+    </script>
+
+
+
+
+</body>
+</html>

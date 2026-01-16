@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spread y Rest en JS</title>
+  </head>
+  <body>
+    <script>
+
+        //1. SPREAD
+
+      function ejemploSpread(a, b, c) {
+        console.log(a, b, c);
+      }
+      ejemploSpread(...[1, 2, 3]); 
+      
+      // Spread
+      /*Piensa: "tengo una colección y quiero soltar sus elementos sueltos".
+      */
+
+
+      //2. RESET
+
+      //Piensa: "quiero meter lo que sobre en un saco (array/objeto)".
+            
+      function ejemploRest(...valores) {
+        console.log(valores);
+      }
+      ejemploRest(1, 2, 3); // Rest → [1, 2, 3]
+
+      const numeros = [10, 20, 30, 40];
+
+// 👉 SPREAD: Expande los valores del array
+console.log(Math.max(...numeros)); // 40
+
+// 👉 REST: Recoge todos los valores en un array
+function mostrar(...args) {
+  console.log(args);
+}
+mostrar(10, 20, 30, 40); // [10, 20, 30, 40]
+
+
+
+    </script>
+  </body>
+</html>

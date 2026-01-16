@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Incremento</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    <div>
+        <p>Contador Básico</p>
+        <p id="contador">0</p>
+        <button>Incrementar</button>
+    </div>
+
+
+
+    <script>
+        
+        const boton = document.querySelector('button');
+        //console.log(boton)
+        const contadorElement = document.querySelector('#contador');
+        //console.log(conteo)
+        
+        let contador = 0; //Tiene que ir afuera porque si está dentro la va creando cada vez que se llama a la función, va desapareciendo cada vez que se llama, en el siguiente click vuelve a crearse en 0
+
+        const incrementar = () => {
+            contador++;
+            contadorElement.textContent = contador;
+        }
+
+        boton.addEventListener('click', incrementar);
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajando con Objetos</title>
+</head>
+<body>
+    
+
+    <script>
+
+        console.log('1. Notación literal')
+        const persona1 = {
+            nombre: 'Angie',
+            edad: '26',
+        }
+        console.log(persona1);
+
+        console.log('2. constructor Object')
+        const persona2 = new Object();
+
+        persona2.nombre = 'Angie';
+        persona2.edad = '26';
+        persona2.saludar = () => console.log('HOLAA'); //Aquí se le está agregando una función como propiedad
+        persona2.saludar();
+
+        console.log('3. función constructora');
+
+        function Persona(nombre, edad) {
+            this.nombre = nombre;
+            this.edad = edad;
+        
+        }
+
+        const persona3 = new Persona('Angie', 26);
+        console.log(persona3);
+
+        console.log('4. Class');
+        class Personal {
+
+            constructor(nombre, edad){
+                this.nombre = nombre;
+                this.edad = edad;
+            }
+
+        }
+
+        const persona4 = new Personal('Anaa', 28);
+        console.log(persona4)
+
+        console.log('5. factory function');
+
+        function crearPersona(nombre, edad) {
+            return {
+    nombre,
+    edad,}
+        }
+const persona5 = crearPersona("Ana", 28);
+
+ console.log('6. Object.create()');
+const personaProto = {
+  saludar() {
+    return `Hola, soy ${this.nombre}`;
+  }
+};
+
+const persona = Object.create(personaProto);
+persona.nombre = "Ana";
+persona.edad = 28;
+
+/*1. Notación literal
+2. Constructor new Persona
+3. function Persona
+4. Class Persona
+5. factory function () crearPersona se pone solo las claves.
+6.Object.create() - notación literal y se pasa el elemento en object create 
+*/
+
+
+
+const coche = {
+    marca: 'Renault',
+    modelo:'1970',
+
+    arrancar () {
+        console.log('ARRANCOOOO')
+    }
+
+
+}
+
+//Object
+
+const animal = new Object();
+animal.nombre = 'Milka';
+animal.tipo = 'gato';
+animal.presentarse = () => console.log(`Nombre:${animal.nombre}`)
+
+animal.presentarse();
+
+//función constructora
+
+function Producto(nombre, precio) {
+    
+    this.nombre = nombre;
+    this.precio = precio;
+
+    this.mostrarInfo = () => {
+        console.log(`Nombre:${nombre}`)
+    }
+
+
+}
+
+const producto = new Producto('andja', 4);
+console.log(producto)
+producto.mostrarInfo();
+
+//clase ES6
+
+class Libro {
+
+    constructor(titulo,autor){
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+
+    descripcion () {
+        console.log("Soy la descripción del libro")
+    }
+
+}
+
+
+console.log(new Libro("Cien años de soledad", "Gabriel García"));
+
+//factory function
+
+function crearUsuario(usuario, email) {
+    return {
+        usuario, 
+        email,  
+
+        mostrarEmail() {
+        console.log(this.email)
+        }
+    }
+
+}
+
+const usuario = crearUsuario('dasibhd', 'dhsabdha@')
+console.log(usuario)
+usuario.mostrarEmail();
+
+
+//Object.create
+
+const personaPrototipo = {
+
+    saludar() {
+    return `Hola, soy ${this.nombre}`;
+  } //Permite crear objetos que comparten un prototipo común (útil para herencia simple).
+
+}
+
+const personaConObject = 
+Object.create(personaPrototipo);
+
+console.log(personaConObject)
+   
+
+
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso a Elementos del DOM</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1>Titulo general</h1>
+    <section id="seccion-01">
+        <h2 class="subtitulo">Subtitulo sección 1</h2>
+        <p>Párrafo 1 sección 1</p>
+        <ul class="lista">
+            <li class="item">Item 1 de sección 1</li>
+            <li class="item">Item 2 de sección 1</li>
+            <li class="item">Item 3 de sección 1</li>
+        </ul>
+        <p>Párrafo 2 sección 1</p>
+    </section>
+    <section id="seccion-02">
+        <h2 class="subtitulo">Subtitulo sección 2</h2>
+        <p>Párrafo 1 sección 2</p>
+        <ul class="lista">
+            <li class="item">Item 1 de sección 2</li>
+            <li class="item">Item 2 de sección 2</li>
+            <li class="item">Item 3 de sección 2</li>
+        </ul>
+        <p>Párrafo 2 sección 2</p>
+    </section>
+    <footer>
+        <p>Esto es el footer de la página</p>
+    </footer>
+
+    <script>
+
+        // MÉTODOS MODERNOS DE ACCESO: VÍA SELECTOR
+
+        // Primer elemento que coincide con el selector
+
+        // #section-02
+        const miSeccion02 = document.querySelector('#seccion-02');
+        console.log(miSeccion02);
+        miSeccion02.style.border = '1px solid red';
+
+        // li
+       
+        const miPrimerLi = document.querySelector('li');
+        console.log(miPrimerLi.innerText);
+
+        // #section-02 .item   
+        const miPrimerItemSeccion02 = document.querySelector('#seccion-02 .item');
+        console.log(miPrimerItemSeccion02.innerText);
+        miPrimerItemSeccion02.innerText = 'HOLAAA';
+
+        // Todos los elementos que coinciden con el selector
+        
+        // p
+
+        console.log('\nTodos los párrafos');
+        console.log('------------------');
+        const parrafos = document.querySelectorAll('p');
+        console.log(parrafos); //Esto da un NodeList que es una colección iterable
+
+        parrafos.forEach(
+            parrafo => console.log(parrafo.textContent)
+        );
+
+        // #section-02 .item
+        console.log('\nTodos los items de la sección 2');
+        console.log('-----------------------------------');
+
+        const itemsSeccion02 = document.querySelectorAll('#seccion-02 .item')
+        console.log(itemsSeccion02)
+
+        itemsSeccion02.forEach(
+            item => console.log(item.textContent)
+        );
+
+        // Acceso a nodo padre del primer item de la sección 1
+        console.log('\nPadre del primer item de la sección 1');
+        console.log('-----------------------------------');
+
+        const miPrimerItemSeccion01 = document.querySelector('#seccion-01 .item')
+        const padrePrimerItemSeccion01 = miPrimerItemSeccion01.parentNode;
+        console.log(padrePrimerItemSeccion01)
+
+        // Acceso a los nodos hijos de ul de la sección 1
+        console.log('\nHijos del ul de la sección 1');
+        console.log('--------------------------------');
+
+        const ulDeLaSeccion01 = document.querySelector('#seccion-01 ul')
+        console.log(ulDeLaSeccion01);
+
+        const hijosNodosDeUlDeLaSeccion01 = ulDeLaSeccion01.childNodes;
+        console.log(hijosNodosDeUlDeLaSeccion01);
+
+        hijosNodosDeUlDeLaSeccion01.forEach(
+            hijo => console.log(hijo.textContent)
+        )
+
+        // Acceso a los elementos hermanos de ul del primer li de la sección 2
+        console.log('\nHermanos del primer li de la sección 2');
+        console.log('--------------------------------------');
+
+        const primerLiDeLaUlDeLaSeccion02 = document.querySelector('#seccion-02 .item')
+        console.log(primerLiDeLaUlDeLaSeccion02);
+
+        let hermano = primerLiDeLaUlDeLaSeccion02.nextElementSibling;
+        console.log(hermano);
+
+        while(hermano !== null){
+            console.log(hermano.textContent);
+            hermano = hermano.nextElementSibling;
+        }
+
+
+    </script>
+    
+</body>
+</html>

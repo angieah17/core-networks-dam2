@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso Examen</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+  <h1 id="titulo">Título</h1>
+  <div id="ejercicio1"></div>
+  <div id="ejercicio2"></div>
+  <div id="ejercicio3"></div>
+  <div id="numeroBinario"></div>
+    
+    <script>
+
+        //1. Sabes usar typeof() y console.log()
+        console.log("Uso de typeof() y console.log")
+        const numero = 1;
+        console.log(typeof numero)
+
+        //2. Operaciones Number y BigInt
+
+        const numBig = 90093793729379468264927659859n;
+        let suma = BigInt(numero) + numBig;
+
+        console.log(suma + typeof suma)
+        suma = numero + Number(numBig) //se pierde precisión
+        console.log(suma + typeof suma) 
+
+        //Para guardarlo se debe hacer un cast de alguno
+
+       //3. ... Compresión y Descompresión
+
+       //Descompresión
+       const numeros = [1, 2, 3, 4];
+
+       const masNumeros = [...numeros, 4, 5];
+       console.log(masNumeros);
+
+        //Compresión
+       function mostrarSumas (...num){
+            console.log(num);
+       }
+
+       mostrarSumas(suma, 4, 5);
+
+       //4. Objeto
+
+       const fechaNacimiento = {
+            dia: 17,
+            mes: 8,
+            anio: 1999,
+
+       }
+
+       const prefijo = 'id'
+
+
+       let persona = {
+
+            nombre: 'Angie',
+            apellido: 'Amado',
+            edad: 25,
+            fechaNacimiento,
+            [`${prefijo}_persona`]: 1,
+
+            sacarNombreYApellido () {
+                return this.nombre + ' ' + this.apellido;
+            }
+
+
+       }
+
+       persona.nacionalidad = 'Colombia';
+       console.log(persona)
+       delete persona.edad;
+       console.log(persona)
+
+       console.log(persona.sacarNombreYApellido());
+
+      //5. Bucles
+      
+      for (let index = 10; index >= 1; index--) {
+        console.log(index);
+        
+      }
+
+      for (let index = 1; index <= 20; index++) {
+        if(index % 2 === 0)
+        console.log(index);
+        
+      }
+
+      let frutas = ["manzana", "banana", "cereza"];
+
+      for (const fruta of frutas) {
+            console.log(fruta.toUpperCase())
+      }
+
+      const coche = {marca: "Toyota", modelo: "Corolla", año: 2020};
+
+      for (const clave in coche) {
+        
+        console.log(`${clave}: ${coche[clave]}`);
+        
+      }
+
+      for (const clave in persona) {
+        
+        console.log(clave)
+        
+      }
+
+      numeros.forEach(
+        num => console.log(num * 3)
+
+      )
+
+      Object.entries(persona).forEach(
+        clave => console.log(clave)
+
+      )
+
+      let num = 5;
+
+      while(num <= 15){
+          console.log(num);
+          num++;
+      }
+
+      let nume = 1;
+
+      do{
+        console.log(nume);
+        nume++;
+      }while(nume <= 5)
+
+      const numerosDupl = numeros.map(n => n * 2);
+      console.log(numerosDupl);
+
+      console.log(numeros.filter(n => n > 3))
+      console.log(
+      numeros.filter(n => n % 2 === 0).map(n => n * 2));
+
+      const titulo = document.querySelector('#titulo');
+
+
+      titulo.style.backgroundColor = 'red';
+
+      const divi = document.querySelector('#ejercicio1');
+      divi.innerHTML = `<button id='boton'>Botón</button>`;
+
+      const boton = document.querySelector('#boton');
+      
+      function generarNumeroAleatorio() {
+        
+        return Math.floor(Math.random() * 256); //Se debe usar el Math.floor y Math.random para sacar números enteros aleatorios. 
+
+      }
+      
+
+      function cambiarColorFondo() {
+        document.body.style.backgroundColor = `rgb(${generarNumeroAleatorio()}, ${generarNumeroAleatorio()}, ${generarNumeroAleatorio()})`;
+      }
+
+      //boton.addEventListener('click', cambiarColorFondo); //Si se pide que se cambie el color de fondo cada vez
+      
+
+      boton.addEventListener('click', () => {
+      cambiarColorFondo();
+      boton.disabled = true; //Si se quiere que se cambie el fondo 1 sola vez
+      });
+
+      const ejercicio2 = document.querySelector('#ejercicio2');
+      const ejercicio3 = document.querySelector('#ejercicio3');
+      ejercicio2.innerHTML = `<button id='botonDe0'>0</button>`;
+      ejercicio3.innerHTML = `<button id='botonDe1'>1</button>`;
+      
+      
+      const botonDe0 = document.querySelector('#botonDe0');
+      const botonDe1 = document.querySelector('#botonDe1');
+
+      const numeroBinario = document.querySelector('#numeroBinario')
+
+      console.log(numeroBinario);
+
+
+      function agregar0 () {
+          numeroBinario.textContent = 0 + numeroBinario.textContent;
+
+      }
+
+      function agregar1() {
+        numeroBinario.textContent = 1 + numeroBinario.textContent;
+      }
+
+      botonDe0.addEventListener('click', agregar0);
+      botonDe1.addEventListener('click', agregar1);
+
+
+      function funcionSuperior(funcionMenor, a, b) {
+        return funcionMenor(a,b); // Aquí se define cómo funcionará esa función menor
+      }
+
+      function sumar(x, y) {
+        return x + y;
+      }
+
+      console.log(funcionSuperior(sumar, 2, 5));
+
+      function operar3Numeros(operacion, a, b, c) {
+        return operacion(a, b, c);
+      }
+
+      function calcularPolinomio(x, y, z) {
+        
+        return 2*x + 5 * y + 6 * z;
+
+      }
+  
+      
+
+      console.log(operar3Numeros(calcularPolinomio,1, 2, 3))
+
+
+    </script>
+
+
+</body>
+</html>

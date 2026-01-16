@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        div,
+        p,
+        h1,
+        h2,
+        span,
+        footer {
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="titulo-principal">Tienda Online</h1>
+
+    <div id="ofertas">
+        <h2>Ofertas del día</h2>
+        <p class="oferta">Descuento del 10%</p>
+        <p class="oferta">Descuento del 20%</p>
+    </div>
+
+    <div class="producto destacado"> <!-- este elemento pertenece tanto a .producto como a .destacado -->
+        <h2>Producto 1</h2>
+        <p>Descripción del producto 1</p>
+        <span>Precio: 10€</span>
+    </div>
+
+    <div class="producto">
+        <h2>Producto 2</h2>
+        <p>Descripción del producto 2</p>
+        <span>Precio: 20€</span>
+    </div>
+
+    <div class="producto">
+        <h2>Producto 3</h2>
+        <p>Descripción del producto 3</p>
+        <span>Precio: 30€</span>
+    </div>
+
+    <p>Texto informativo general.</p>
+    <p>Otro párrafo sin clase.</p>
+
+    <footer>
+        <p>© 2025 Tienda Online</p>
+    </footer>
+    <script>
+        //Ejercicio 1
+        document.getElementById('titulo-principal').style.backgroundColor = 'yellow';
+
+        //Ejercicio 2
+        document.querySelector('.producto').style.backgroundColor = 'lightblue';
+
+        //Ejercicio 3
+        const productos = document.querySelectorAll('.producto');
+        productos.forEach (producto => producto.style.backgroundColor = 'lightgreen')
+
+        //Ejercicio 4
+        document.querySelectorAll('p').forEach(parr => parr.style.backgroundColor = 'pink');
+        
+        //Ejercicio 5
+        document.querySelectorAll('.oferta').forEach(of => of.style.backgroundColor = 'orange');
+
+        //Ejercicio 6
+        document.querySelector('#ofertas').style.backgroundColor = 'lightgray';
+
+        //Ejercicio 7
+        document.querySelectorAll('h2').forEach(ti => ti.style.backgroundColor = 'violet');
+
+        //Ejercicio 8
+        document.querySelectorAll('span').forEach(elemento => elemento.style.backgroundColor = 'cyan');
+
+        //Ejercicio 9
+        document.querySelectorAll('div').forEach(elemento => elemento.style.backgroundColor = 'beige');
+
+        //Ejercicio 10
+        document.querySelector('footer').style.backgroundColor = 'lavander';
+
+        //Ejercicio 11 **
+
+        document.querySelector('.producto:nth-of-type(2)').style.backgroundColor = 'coral';
+
+        //Ejercicio 12 **
+
+        document.querySelector('.oferta:first-of-type').style.backgroundColor = 'turquoise';
+
+        //Ejercicio 13 
+        document.querySelector('.producto:last-of-type').style.backgroundColor = 'salmon';
+
+        //Ejercicio 14 
+        document.querySelectorAll('h1').forEach(elemento => {
+            elemento.style.backgroundColor = 'peachpuff';
+        });
+
+        //Ejercicio 15
+        document.querySelector('.destacado').style.backgroundColor = 'gold';
+
+        //Ejercicio 16
+        document.querySelector('.producto:nth-of-type(3)').style.backgroundColor = 'lightcyan';
+
+        //Ejercicio 17
+        document.querySelectorAll('h2').forEach(titulo => titulo.style.backgroundColor = 'thistle' );
+
+
+        //Ejercicio 18
+        document.querySelector('div:first-of-type').style.backgroundColor = 'aquamarine';
+
+        //Ejercicio 19
+
+        document.querySelector('.oferta:nth-of-type(2)').style.backgroundColor = 'lightpink';
+
+        //Ejercicio 20
+        document.querySelector('body').style.backgroundColor = 'cornsilk';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

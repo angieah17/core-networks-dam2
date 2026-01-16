@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones de Orden Superior</title>
+</head>
+<body>
+    
+
+<script>
+
+    // Función de orden superior que recibe otra función
+function ejecutarOperacion(operacion, a, b) {
+  return operacion(a, b);
+}
+
+// Funciones que serán pasadas como argumentos
+function suma(x, y) {
+  return x + y;
+}
+
+function resta(x, y) {
+  return x - y;
+}
+
+
+
+console.log(ejecutarOperacion(suma, 5, 3)); // 8
+console.log(ejecutarOperacion(resta, 5, 3)); // 2
+
+console.log(ejecutarOperacion(suma, 'A', 'B'));
+</script>
+
+</body>
+</html>

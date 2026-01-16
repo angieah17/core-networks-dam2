@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creación de Objetos</title>
+  </head>
+  <body>
+    <script>
+      //1. Notación Literal
+
+      const persona = {
+        nombre: "Ana",
+        edad: 25,
+
+        saludar() {
+          console.log("Holaaa");
+        },
+
+        get nombrecito() {
+          return `${this.nombre}`;
+        },
+
+        set nuevoNombre(nuevoNombre) {
+          this.nombre = nuevoNombre;
+        },
+      };
+
+      console.log(persona);
+      console.log(persona.nombrecito);
+
+      //2. function
+
+      function Persona(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+
+        this.saludar = () => {
+          console.log("HOLAAA");
+        };
+      }
+
+      const persona1 = new Persona("Anaaa", 26);
+
+      console.log(persona1);
+      persona1.saludar();
+
+      //3. Class
+
+      class Animal {
+        constructor(nombre, edad) {
+          this.nombre = nombre;
+          this.edad = edad;
+        }
+
+        sacarNombre() {
+          console.log(`Mi nombre es${this.nombre}`);
+        }
+      }
+
+      const animal1 = new Animal("Paco", 2);
+      console.log(animal1);
+      animal1.sacarNombre();
+
+      delete animal1.edad;
+      console.log(animal1);
+
+      //4. new Object
+
+      const personita = new Object();
+
+      personita.nombre = "Pedro";
+      console.log(personita);
+
+      //5. factory function
+
+      function crearPersonita(nombre, edad) {
+        return {
+          nombre,
+          edad,
+          saludar() {
+            console.log("HOLAAA");
+          },
+        };
+      }
+      const person = crearPersonita("JUAN", 28);
+
+      console.log(person);
+      person.saludar();
+
+      //6. Object.create()
+
+      const proto = {
+        saludar() {
+          console.log("HOLAAA");
+        },
+      };
+
+      const p = Object.create(proto);
+
+      p.nombre = "Mon";
+      console.log(p);
+      p.saludar();
+    </script>
+  </body>
+</html>

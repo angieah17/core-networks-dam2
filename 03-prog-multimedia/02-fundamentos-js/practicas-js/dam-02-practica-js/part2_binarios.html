@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Binarios</title>
+</head>
+<body>
+    
+    <h2 id="display"></h2>
+    <button id="boton0">0</button>
+    <button id="boton1">1</button>
+
+    <script>
+
+        const display = document.getElementById('display');
+        const boton0 = document.getElementById('boton0');
+        const boton1 = document.getElementById('boton1');
+
+        let numeroBinario = '';
+
+        boton0.addEventListener('click', () => {
+            numeroBinario += '0';
+            display.textContent = numeroBinario;
+        })
+
+        boton1.addEventListener('click', () => {
+            numeroBinario += '1';
+            display.textContent = numeroBinario;
+        })
+
+        
+
+
+
+
+    </script>
+
+
+</body>
+</html>

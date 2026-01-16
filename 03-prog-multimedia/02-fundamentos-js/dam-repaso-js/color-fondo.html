@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiador aleatorio color de fondo</title>
+</head>
+<body>
+    
+    <div>Cambiador de Color</div>
+    <button>Cambiar color</button>
+    <p id="colorActual">Color actual:</p>
+
+
+    <script>
+
+        const boton = document.querySelector('button');
+        console.log(boton);
+        const colorActual = document.querySelector('#colorActual');
+        console.log(colorActual);
+
+        // Función para generar un color aleatorio en formato hexadecimal
+        const generarColorAleatorio = () => {
+        
+            // Generar un número hexadecimal de 6 dígitos, porque viene de 256 * 256 * 256 - 1 (porque la posibilidad del rgb(0 a 255, 0 a 255, 0 a 255))
+            const colorHex = Math.floor(Math.random()*16777215).toString(16);
+            
+            // Asegurarse de que tiene 6 dígitos (añadiendo ceros a la izquierda si es necesario)
+            return '#' + colorHex.padStart(6, '0').toUpperCase();
+        };
+        
+
+
+        const cambiarColor = () => {
+
+            const nuevoColor = generarColorAleatorio();
+
+            document.body.style.backgroundColor = nuevoColor;
+
+            // Actualizar el texto que muestra el color actual
+            colorActual.textContent = `Color actual: ${nuevoColor}`;
+
+        }
+
+        boton.addEventListener('click', cambiarColor);
+
+
+    </script>
+
+
+</body>
+</html>

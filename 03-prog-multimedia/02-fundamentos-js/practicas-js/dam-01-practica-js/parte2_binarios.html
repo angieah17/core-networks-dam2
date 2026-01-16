@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Binarios</title>
+</head>
+<body>
+    
+    <div>
+        <h2 id="display"></h2>
+        <button id="boton0">0</button>
+        <button id="boton1">1</button>
+    </div>
+
+    <script>
+
+        const display = document.querySelector('h2')
+        const boton0 = document.querySelector('#boton0');
+        const boton1 = document.querySelector('#boton1');
+
+        boton0.addEventListener('click', () =>
+
+        display.textContent += '0'
+
+        )
+
+        boton1.addEventListener('click', () =>
+
+        display.textContent += '1'
+
+        )
+
+
+    </script>
+
+
+</body>
+</html>

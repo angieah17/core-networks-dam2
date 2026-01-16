@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+<body>
+    
+
+    <button>Soy un botón</button>
+
+    <script>
+
+        const boton = document.querySelector('button');
+
+        console.log(boton)
+
+        // Añadir un manejador de eventos definiendo la función en la instrucción
+
+        boton.addEventListener('click', function (event) {
+          alert('Hola mundo');
+          console.log(event);  
+        })
+
+        // Añadir un segundo manejador definiendo la función usando función flecha
+
+        boton.addEventListener('click', () =>
+            console.log('Segundo manejador.')
+        )
+
+        // Añadir otro manejador con una función nombrada
+
+        const saludar1 = () => {
+            alert('¡Hola desde una función flecha guardada!')
+        }
+
+        function saludar2() {
+            alert('¡Hola desde una función nombrada!');
+        }
+
+        boton.addEventListener('click', saludar1);
+        boton.addEventListener('click', saludar2);
+
+        boton.removeEventListener('click', saludar1);
+
+
+    </script>
+
+
+</body>
+</html>

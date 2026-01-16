@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Color del Botón</title>
+</head>
+<body>
+    
+
+    <button>Cambiar Color</button>
+
+    <script>
+
+        const boton = document.querySelector('button');
+        console.log(boton)
+
+        const listaColores = ['lightblue', 'lightgreen', 'lightyellow', 'lightpink', 'lavender'];
+
+        /*function cambiarColor() {
+            let nuevoColor = listaColores[Math.floor(Math.random() * listaColores.length)];
+            document.body.style.backgroundColor = nuevoColor;
+        }
+
+        boton.addEventListener('click', cambiarColor);*/
+
+        boton.addEventListener('click', () => {
+
+            let nuevoColor = listaColores[Math.floor(Math.random() * listaColores.length)];
+            document.body.style.backgroundColor = nuevoColor;
+
+        }
+        
+    
+        )
+       
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector</title>
+</head>
+<body>
+    <script>
+
+        document.getElementById('#titulo-principal').style.backgroundColor = 'yellow';
+        document.querySelectorAll('.producto').forEach(elemento => elemento.style.backgroundColor = 'lightgreen')
+        document.querySelectorAll('.oferta').forEach(elemento => elemento.style.backgroundColor = 'orange')
+        document.querySelectorAll('h2').forEach(elemento => elemento.style.backgroundColor = 'violet')
+        document.querySelector('.producto:nth-of-type(2)').style.backgroundColor = 'coral';
+
+
+    </script>
+</body>
+</html>

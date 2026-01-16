@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propagación</title>
+    <style>
+        #externo{
+            border: 3px solid blue;
+            padding: 30px;
+        }
+
+        #medio{
+            border: 3px solid green;
+            padding: 30px;
+        }
+
+        #interno{
+            border: 3px solid red;
+            padding: 30px;
+        }
+
+        button{
+            padding: 10px 20px;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div id="externo"> DIV EXTERNO (azul)
+        <div id="medio">DIV MEDIO (verde)
+            <div id="interno"> DIV INTERNO (rojo)
+                <button id="boton">Click aquí</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        const externo = document.getElementById('externo');
+        const medio = document.getElementById('medio');
+        const interno = document.getElementById('interno');
+        const boton = document.getElementById('boton');
+
+        /*externo.addEventListener('click', (e) => {
+            console.log('Click en Externo');
+            e.stopPropagation();
+        });*/
+
+        externo.addEventListener('click', () => 
+            console.log('Click en Externo')
+        );
+        medio.addEventListener('click', () => console.log('Click en Medio'));
+        interno.addEventListener('click', () => console.log('Click en Interno'));
+        boton.addEventListener('click', () => console.log('Click en Botón'));
+
+        /*CUANDO SE PULSA CADA ELEMENTO:
+        BOTON: Mensajes de Botón -> Interno -> Medio -> Externo 
+        INTERNO: Mensajes de Interno -> Medio -> Externo 
+        MEDIO: Mensajes de Medio -> Externo 
+        EXTERNO: Mensaje de Externo 
+
+        Para detener la propagación se debería pasar como parámetro e y añadir e.stopPropagation() en la función 
+        de cada addEventListener
+        
+        */
+
+        //Para que salga inverno en todos los eventListenner se debe agregar true
+        
+
+
+
+    </script>
+
+</body>
+</html>

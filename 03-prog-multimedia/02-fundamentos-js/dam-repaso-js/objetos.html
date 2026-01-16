@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objetos</title>
+  </head>
+  <body>
+    <script>
+      const persona = {
+        nombre: "Ana",
+        "apellido materno": "García",
+      };
+
+      //Acceder a las propiedades:
+
+      console.log(persona.nombre);
+      console.log(persona["apellido materno"]); //Cuando está separado por espacios toca acceder a través de ['']
+
+      //Añadir o modificar propiedad
+      persona.nombre = "Anita"; // Modificar
+      persona.edad = 25; // Añadir
+
+      console.log(persona.nombre);
+      console.log(persona.edad);
+
+      console.log("PROBANDO FOR IN DE PROPIEDADES");
+
+      delete persona.edad;
+
+      for (const clave in persona) {
+        console.log(clave);
+      }
+
+      //Verificar la existencia de una propiedad
+
+      console.log("VERIFICAR EXISTENCIA DE UNA PROPIEDAD");
+
+      console.log("nombre" in persona); // true
+      console.log("estado" in persona); // false
+      console.log(persona.hasOwnProperty("nombre")); // true
+      console.log(persona.hasOwnProperty("estado")); // false
+
+      //Dentro del objeto se crean también los métodos
+
+      const calculadora = {
+        
+        a: 0,
+        b: 0,
+
+        //Método de asignar valores
+
+        asignar(a,b){
+            this.a = a;
+            this.b = b;
+        },
+
+        //Métodos matemáticos
+        //Ojo las funciones como métodos de objetos no se escribe () => .. sino (){}
+        
+        sumar(){
+            return this.a + this.b;
+        },
+
+        restar(){
+            return this.a - this.b;
+        },
+
+
+      }
+
+      calculadora.asignar(1,2);
+
+      console.log(calculadora.sumar());
+
+
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Parte1</title>
+</head>
+<body>
+    <script>
+
+        console.log('Ejercicio 1');
+        const datos = ['hola', 12, {}];
+
+        datos.forEach(dato => console.log(typeof dato))
+
+        console.log('Ejercicio 2');
+        const num = 100;
+        const big = 50n;
+
+        console.log(num * 2);
+        console.log(big * 2n);
+        console.log(BigInt(num) + big);
+
+        console.log('Ejercicio 3');
+
+        const numeros = [10, 20, 30];
+        const nuevoArray = [0, ...numeros, 40, 50]; //Expansión_Descompresión
+        
+        function sumarTodos(...nums) {
+            let suma = 0;
+            
+            nums.forEach(
+                n => suma += n
+            )
+
+            return suma;
+
+        }
+
+        console.log(sumarTodos(5, 10, 15, 20)); //Agrupación_Compresión
+    
+        console.log('Ejercicio 4');
+        
+        const coche = {
+            marca: 'Toyota',
+            precio: '20000',
+            motor: {
+                tipo: 'gasolina',
+                potencia: 150,
+            },
+
+            arrancar() {
+                console.log('El coche arranca')
+            },
+
+
+        }
+
+        coche.color = 'rojo';
+        //JS espera un objeto descriptor, no una funciónn como tercer parámetro de defineProperty()
+        Object.defineProperty(coche, 'precioIVA', {
+            get(){
+                return this.precio * 1.21;
+            } //Se necesita el get para acceder al precio, ya que, la función () => no tiene el this
+        });
+
+        delete coche.motor;
+
+        coche.arrancar();
+
+        console.log(coche.precioIVA)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

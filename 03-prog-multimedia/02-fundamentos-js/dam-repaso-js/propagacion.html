@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propagación</title>
+    <style>
+        #inner {
+            border: 1px solid red;
+            margin: 10px;
+        }
+        #outer {
+            border: 1px solid blue;
+            margin: 10px;
+        }
+        #button {
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div id="inner">
+          <button id="button">Clic</button>
+        </div>
+      </div>
+      <script>
+// Seleccionar elementos
+const outer = document.getElementById('outer');
+const inner = document.getElementById('inner');
+const button = document.getElementById('button');
+
+// Fase de burbujeo (predeterminado)
+
+/*outer.addEventListener('click', () => console.log('Outer - Burbujeo'));
+inner.addEventListener('click', () => console.log('Inner - Burbujeo'));
+button.addEventListener('click', () => console.log('Button - Burbujeo'));*/
+
+// Fase de captura (tercer parámetro true)
+/*outer.addEventListener('click', () => console.log('Outer - Captura'), true);
+inner.addEventListener('click', () => console.log('Inner - Captura'), true);
+button.addEventListener('click', () => console.log('Button - Captura'), true);*/
+
+/*Cuando se gestionan eventos estos se van propagando de manera predeterminada: desde lo que está más dentro incluyendo lo que está afuera.  (o invertido si tiene el tercer parámetro true)
+
+Para hacer que cada evento esté independiente debo hacer el stopPropagation
+
+*/
+
+
+outer.addEventListener('click', (e) => {
+    console.log('Outer - Captura');
+    e.stopPropagation();
+});
+
+button.addEventListener('click', (e) => {
+    console.log('Button - Captura');
+    e.stopPropagation();
+});
+
+inner.addEventListener('click', (e) => {
+    console.log('Inner - Captura');
+    e.stopPropagation();
+});
+
+
+
+      </script>
+</body>
+</html>

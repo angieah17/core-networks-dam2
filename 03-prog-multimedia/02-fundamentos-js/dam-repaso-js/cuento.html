@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colecciones Para un Cuento</title>
+</head>
+<body>
+    
+    <script>
+        // Función para obtener el cuento
+function obtenerCuento() {
+  return `El cuento de la lechera. 
+Una joven lechera llevaba en la cabeza un cubo de leche que acababa de ordeñar. 
+Caminaba con paso ligero pensando en lo que haría con el dinero cuando vendiera la leche.
+"Compraré huevos", pensó la lechera, "y cuando los pollitos crezcan, venderé los pollos.
+Con ese dinero podré comprar un vestido nuevo para lucirlo en la fiesta del pueblo.  
+Seguro que cuando me vean con él, todos los jóvenes me mirarán y podré elegir al que más me guste."
+Pensando en esto, la lechera comenzó a dar saltos de alegría. El cubo se cayó, y toda la leche se derramó por el suelo.
+Sin leche, sin huevos, sin pollos, sin vestido y sin pretendientes. 
+La lechera aprendió que no debemos contar con algo antes de tenerlo. 
+Durante el camino de vuelta, la lechera lamentó lo ocurrido, pero luego pensó que lo mejor era seguir adelante con optimismo.
+El fracaso de sus planes la hizo reflexionar y ser más precavida en el futuro.
+Con el tiempo, la lechera prosperó gracias a su esfuerzo y perseverancia, aunque nunca volvió a fantasear con lo que aún no tenía.`;
+}
+
+console.log(obtenerCuento());
+
+function devuelvePalabras(texto) {
+
+    const cuentoSinEspacios = texto.replaceAll('.',' ').replaceAll(',', ' ').replaceAll(/\s+/g, ' ');
+    //console.log(cuentoSinEspacios)
+   
+    console.log(cuentoSinEspacios.split(' '));
+    //este método devuelve un array con todas las palabras
+
+}
+
+const palabras = devuelvePalabras(obtenerCuento());
+
+function arrayPalabras(...palabras) {
+    
+  console.log(palabras);
+
+}
+
+
+
+arrayPalabras(palabras)
+
+
+
+
+    </script>
+
+
+</body>
+</html>

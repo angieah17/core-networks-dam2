@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso para Examen</title>
+</head>
+<body>
+    
+    
+    <script>
+        console.log('EJERCICIO 1');
+        //1. Dado
+        const numeros = [1, 2, 3, 4, 5];
+        // Crea un bucle forof para mostrar en consola todos los valores
+
+        for (const num of numeros){
+            console.log(num);
+        }
+
+        /*Es un array: elemento iterable. Se puede recorrer con for ... of sin problema.
+        */
+
+        //2. Dado
+        // Crea un bucle for...in para mostrar en consola todos los valores
+
+        console.log('EJERCICIO 2');
+
+        for (const indice in numeros) {
+            console.log(numeros[indice]);
+        }
+
+        /*for ... in está pensado en general para objetos, sin embargo, también se puede usar para recorrer objetos iterables como los array.
+
+        Por lo tanto, si se usa solo se accede al índice no al valor. Para acceder al valor se debe poner el indice entre []
+        */
+
+        console.log('EJERCICIO 3');
+        //3. Dado
+        // Crea un bucle for(ni of ni in) para mostrar en consola todos los valores
+
+
+        numeros.forEach( num => 
+            console.log(num)
+        );
+
+        /*foreach funciona con los array únicamente. Entonces si se quiere recorrer las propiedeades de un objeto es necesario convertirlo en array.
+
+        Al array se le aplica el foreeach y ejecuta una función a cada elemento del array. 
+
+        En ese caso imprimirlo por consola. 
+        */
+
+        //4. Crea un bucle for para mostrar en consola todos los valores, pero invertidos de orden
+
+        console.log('EJERCICIO 4');
+
+        for (let i = numeros.length; i > 0; i--) {
+            console.log(i);            
+        }
+
+        //5. Dado
+        const persona = { nombre: "Ana", edad: 28, ciudad: "Madrid" };
+        // Crea un bucle forof para mostrar en consola todos los valores
+        console.log('EJERCICIO 5');
+
+
+        for (const valor of Object.values(persona)) {
+            console.log(valor);
+        }
+
+        /*El for.. of al no ser recomendado para objetos, toca transformar el objeto a través de Object.keys(), Object.values() o Object.entries()
+        
+        En este caso como solo necesito los valores se usa Object.values()
+
+        */
+
+        console.log('EJERCICIO 6');
+        // Crea un bucle forin para mostrar en consola todos las claves
+
+        for (const clave in persona) {
+            console.log(clave);
+            
+            
+        }
+
+        /*El for ... in recorre las claves del objeto, para acceder a los valores se usa esta clave como índice para acceder al valor persona[clave]
+        */
+        console.log('EJERCICIO 7');
+        // Crea un bucle forin para mostrar en consola todos los valores
+
+        for (const clave in persona) {
+            console.log(`${clave}: ${persona[clave]}`);            
+        }
+
+        console.log('EJERCICIO 8');
+        // Crea un bucle for(ni of ni in) para mostrar en consola todos los valores
+        Object.values(persona).forEach(
+            valor => console.log(valor)
+        )
+
+        console.log('EJERCICIO 9');
+        // Crea un bucle forof para mostrar en consola todos los valores y claves obtenidos a partir de sus entries
+
+
+        for (const valor of Object.entries(persona)) {
+            console.log(valor)
+        }
+
+        // Crea un bucle for para mostrar en consola todos los valores, pero invertidos de orden
+
+        console.log('EJERCICIO 10');
+
+
+        const valoresDePersona = Object.values(persona);
+
+        console.log(valoresDePersona)
+
+        for (let i = valoresDePersona.length; i >= 0; i--) {
+            console.log(valoresDePersona[i]);            
+        }
+
+
+
+    </script>
+
+</body>
+</html>
