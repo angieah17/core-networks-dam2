@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Datos</title>
+</head>
+<body>
+    
+    <h1 id="titulo"></h1>
+    <div id="binario"></div>
+    <div id="octal"></div>
+    <div id="hexa"></div>
+
+
+    <script>
+
+        const titulo = document.getElementById('titulo');
+        titulo.innerHTML = `003 Tipos de Datos`;
+
+        const numeros = [10, -10, 10, -10.5, Infinity, NaN, true, undefined, null,9007199254740991n];
+
+        const defineTipo = (variable) => `${variable} se corresponde con el tipo ${typeof variable}`;
+
+        for (const numero of numeros) {
+            document.body.innerHTML += `<div>${defineTipo(numero)}</div>`;
+        }
+       
+        const numerosEspeciales = [0o343, 0b10001, 0x3fe1];
+
+        const defineBaseYTipo = (variable, base) => `${base === 2 ? '0b' : base === 8 ? '0o' : base === 16 ? '0x' : ''}${variable.toString(base)} es en decimal ${variable} y ${defineTipo(variable)}`;  
+
+        const binario = document.getElementById('binario');
+        const octal = document.getElementById('octal');
+        const hexa = document.getElementById('hexa');
+
+        binario.innerHTML = defineBaseYTipo(0o343, 8);
+        octal.innerHTML = defineBaseYTipo(0b10001, 2);
+        hexa.innerHTML = defineBaseYTipo(0x3fe21, 16);
+
+       
+        
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        
+    const numeros = [1, 2, 3, 4, 5];
+    
+    const suma = numeros.reduce(
+        (total, n) => total + n, 0
+    
+    );
+
+    console.log(suma);
+
+        /* total: se inicializa en 0. 
+        n : corresponde a cada elemento. 
+        
+
+        suma, producto, max y mini
+        */
+
+        //Producto
+
+    const producto = numeros.reduce(
+        (total, n) => total * n, 1
+    );
+
+    console.log(producto);
+
+    //MAXIMO
+
+    const maximo = numeros.reduce(
+        (maximo, n) => n > maximo ? n : maximo , numeros[0]
+    );
+
+    console.log(maximo);
+
+    // MINIMO
+
+    const minimo = numeros.reduce(
+        (minimo, n) => n < minimo ? n : minimo , numeros[0]
+    );
+
+    console.log(minimo);
+
+
+
+    </script>
+
+</body>
+</html>

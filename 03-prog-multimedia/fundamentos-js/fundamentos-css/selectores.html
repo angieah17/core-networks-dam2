@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>006: Práctica de Selectores CSS</title>
+    <style>
+      /* Estilos base para organización */
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      section {
+        margin-bottom: 30px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      /* SELECTORES BÁSICOS */
+
+      /* 1. Selector de elemento: Selecciona todos los párrafos */
+
+      p {
+        background-color: aqua;
+      }
+
+      /* 2. Selector de clase: Selecciona elementos con clase "destacado" */
+
+      .destacado {
+        font-size: large;
+      }
+
+      /* 3. Selector de ID: Selecciona el elemento con ID "unico" */
+
+      #unico {
+        color: brown;
+      }
+
+      /* 4. Selector universal: Selecciona todos los elementos */
+
+      * {
+        font-style: oblique;
+      }
+
+      /* 5. Selector de atributo: Selecciona elementos con atributo href */
+
+      [href]{
+        background-color: chocolate;
+      }
+
+      /* 6. Selector de atributo con valor exacto: Enlaces que apuntan a PDFs */
+
+      [href$=".pdf"]{
+        background-color: blueviolet;
+      }
+
+      /* 7. Selector de atributo que comienza con: Enlaces externos (https) */
+
+      [href^="https"]{
+        background-color: beige;
+      }
+
+      /* 8. Selector de atributo que contiene: Enlaces que contienen "ejemplo" */
+
+      [href*= "ejemplo"]{
+        font-size: smaller;
+      }
+
+      /* 9. Selector de atributo idioma: Elementos en inglés o variantes */
+
+      [lang|="en"]{
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      /* COMBINADORES DE SELECTORES */
+
+      /* 10. Selector descendiente: Párrafos dentro de div.contenedor */
+
+      div.contenedor p {
+        background-color: cadetblue;
+      }
+      
+
+      /* 11. Selector hijo directo: Párrafos que son hijos directos de div.padre */
+
+      div.padre > p {
+        background-color: darkred;
+      }
+
+      /* 12. Selector adyacente: Párrafos que siguen inmediatamente a un h3 */
+
+      h3 + p {
+        background-color: rgb(218, 142, 142);
+      }
+
+      /* 13. Selector de hermanos generales: Todos los párrafos después de un h3 */
+
+      h3 ~ p {
+        background-color: deeppink;
+      }
+
+      /* 14. Selectores múltiples: h1, h2 y h3 */
+
+      h1, h2, h3 {
+        font-size: 50px;
+      }
+
+
+      /* PSEUDOCLASES */
+
+      /* 15. Elemento al pasar el cursor: Cambiar enlaces al pasar el cursor */
+      
+      p:hover{
+        background-color: crimson;
+      }
+
+      /* 16. Elemento activo: Mientras se hace clic en un enlace */
+
+      h3:active {
+        background-color: #b80b0b;
+      }
+
+      /* 17. Enlace visitado */
+
+      a:visited{
+        background-color: darkgoldenrod;
+      }
+
+      /* 18. Elemento con foco: Campo de formulario seleccionado */
+
+      form input:focus{
+        background-color: darkslateblue;
+      }
+
+
+      /* 19. Primer hijo: Primer elemento li de cualquier lista */
+
+      li:first-child{
+        background-color: darkslategrey;
+      }
+
+      /* 20. Último hijo: Último elemento li de cualquier lista */
+
+      li:last-child{
+        background-color: darkorange;
+      }
+
+      /* 21. Enésimo hijo: Elementos pares de la lista */
+
+      li:nth-child(even){
+        background-color: rgb(126, 126, 153);
+      }
+
+      /* 22. Enésimo hijo: Elementos impares de la lista */
+      
+      li:nth-child(odd){
+        background-color: rgb(61, 34, 182);
+      }
+      
+      /* 23. Enésimo hijo fórmula: Cada tercer elemento de la lista */
+      
+      li:nth-child(3n){
+        background-color: rgb(182, 34, 138);
+      }
+
+
+      /* 24. Elemento vacío: Divs sin contenido */
+
+      div:empty{
+        background-color: darkgoldenrod;
+      }
+
+      /* 25. Elemento requerido: Campos obligatorios */
+
+      #nombre:required {
+        background-color: rgb(212, 127, 16);
+      }
+
+      /* 26. Elemento opcional: Campos no obligatorios */
+    
+      #email:optional {
+        background-color: rgb(16, 212, 104);
+      }
+
+
+      /* 27. Elemento verificado: Checkbox marcado */
+
+
+      input:checked{
+        accent-color: red;
+      }
+
+      /* 28. Elemento habilitado: Inputs habilitados */
+      input:enabled{
+        font-size: 40px;
+      }
+
+      /* 29. Elemento deshabilitado: Inputs deshabilitados */
+
+      button:disabled{
+        font-size: 50px;
+      }
+
+      /* 30. Entrada válida: Campo con dato válido */
+
+      
+      
+      /* 31. Entrada inválida: Campo con dato inválido */
+        
+
+      /* 32. Selector de negación: Párrafos que no tienen la clase "destacado" */
+
+      p:not(.destacado){
+
+        background-color: #b80b0b;
+
+      }
+
+
+      /* 33. Elemento raíz */
+
+
+      /* PSEUDOELEMENTOS */
+
+      /* 34. Primera letra del párrafo */
+      p::first-letter{
+        color: #961111;
+      }
+      /* 35. Primera línea del párrafo */
+
+      p::first-line{
+        background-color: brown;
+      }
+
+      /* 36. Antes del contenido: Añadir comillas antes del texto */
+
+
+
+
+      /* 37. Después del contenido: Añadir comillas después del texto */
+      /* 38. Estilizar el texto seleccionado por el usuario */
+      /* 39. Estilizar el placeholder de los campos */
+      /* 40. Estilizar los marcadores de lista */
+
+      /* SELECTORES AVANZADOS */
+
+      /* 41. Selector is: Estiliza h1, h2 o h3 cuando son el primer hijo */
+      /* 42. Selector where: Similar a :is() pero con especificidad cero */
+      /* 43. Selector has: Párrafos que contienen un span */
+      /* 44. Selector has con adyacente: Párrafos seguidos por un enlace */
+      /* 45. Selector focus-within: Contenedor que tiene un elemento con foco */
+    </style>
+  </head>
+  <body>
+    <h1>006: Práctica de Selectores CSS</h1>
+    <p>
+      Esta página contiene elementos HTML para practicar todos los tipos de
+      selectores CSS.
+    </p>
+
+    <section id="selectores-basicos">
+      <h2>Selectores Básicos</h2>
+
+      <p>Este es un párrafo normal.</p>
+      <p class="destacado">Este es un párrafo con clase "destacado".</p>
+      <p id="unico">Este párrafo tiene ID "unico".</p>
+
+      <div class="contenedor">
+        <p>Este párrafo está dentro de un div con clase "contenedor".</p>
+      </div>
+
+      <p>
+        Enlaces de ejemplo:
+        <a href="https://www.ejemplo.com">Enlace externo HTTPS</a>,
+        <a href="http://ejemplo.local">Enlace HTTP</a>,
+        <a href="documento.pdf">Enlace a PDF</a>,
+        <a href="imagen.jpg">Enlace a imagen</a>,
+        <a href="https://ejemplo.com/pagina">Otro enlace HTTPS con "ejemplo"</a>
+      </p>
+
+      <p lang="en">This paragraph is in English.</p>
+      <p lang="en-US">This paragraph is in US English.</p>
+      <p lang="es">Este párrafo está en español.</p>
+    </section>
+
+    <section id="combinadores">
+      <h2>Combinadores de Selectores</h2>
+
+      <div class="padre">
+        <p>Este párrafo es hijo directo de div.padre</p>
+        <div>
+          <p>Este párrafo es nieto (no hijo directo) de div.padre</p>
+        </div>
+        <p>Este también es hijo directo de div.padre</p>
+      </div>
+
+      <h3>Subtítulo para demostrar selector adyacente</h3>
+      <p>Este párrafo sigue inmediatamente a un h3.</p>
+      <p>Este es otro párrafo después del h3 (no adyacente).</p>
+      <p>Este es un tercer párrafo después del h3.</p>
+    </section>
+
+    <section id="pseudoclases">
+      <h2>Pseudoclases</h2>
+
+      <ul>
+        <li>Primer elemento de la lista</li>
+        <li>Segundo elemento de la lista</li>
+        <li>Tercer elemento de la lista</li>
+        <li>Cuarto elemento de la lista</li>
+        <li>Quinto elemento de la lista</li>
+        <li>Sexto elemento de la lista</li>
+      </ul>
+
+      <form>
+        <div class="form-group">
+          <label for="nombre">Nombre (requerido):</label>
+          <input type="text" id="nombre" required placeholder="Tu nombre" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email (opcional):</label>
+          <input type="email" id="email" placeholder="correo@ejemplo.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="website">Sitio web (URL):</label>
+          <input type="url" id="website" placeholder="https://..." />
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" name="acepto" /> Acepto los términos
+          </label>
+        </div>
+
+        <div class="form-group">
+          <button type="button">Botón Activo</button>
+          <button type="button" disabled>Botón Deshabilitado</button>
+        </div>
+      </form>
+
+      <div></div>
+      <!-- Div vacío para :empty -->
+    </section>
+
+    <section id="pseudoelementos">
+      <h2>Pseudoelementos</h2>
+
+      <p class="drop-cap">
+        Este párrafo tiene una clase "drop-cap" para estilizar su primera letra
+        como una letra capital. El resto del texto continúa normalmente.
+      </p>
+
+      <p class="intro">
+        Este párrafo tiene la clase "intro" para estilizar su primera línea.
+        Tiene suficiente texto para asegurar que ocupe al menos dos líneas en la
+        mayoría de las pantallas, permitiendo así ver el efecto de ::first-line
+        en acción.
+      </p>
+
+      <p class="cita">
+        Este párrafo tiene pseudoelementos ::before y ::after para añadir
+        comillas.
+      </p>
+
+      <ul class="custom-markers">
+        <li>Elemento con marcador personalizado</li>
+        <li>Otro elemento con marcador personalizado</li>
+      </ul>
+    </section>
+
+    <section id="selectores-avanzados">
+      <h2>Selectores Avanzados</h2>
+
+      <article>
+        <h3>Primer artículo</h3>
+        <p>Párrafo simple.</p>
+        <p>Otro párrafo <span>con un span dentro</span>.</p>
+        <a href="#">Enlace dentro del artículo</a>
+      </article>
+
+      <article>
+        <p>Un párrafo inicial.</p>
+        <h3>Segundo artículo</h3>
+        <p>Párrafo después del encabezado.</p>
+      </article>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>003: Tipos de datos</title>
+    <style>
+      p {
+        padding: 5px 5px;
+        background-color: #eee;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>003: Tipos de datos</h1>
+    <div id="contenido"></div>
+
+    <script>
+      function mostrarInfo(valor, base) {
+        // base 8, 16, 2 muestro un mensaje
+        // base distinta muestro otro mensaje
+        const label = document.getElementById("contenido");
+        if (base === 8 || base === 16 || base == 2) {
+          let prefijo =
+            base === 8 ? "0o" : base === 16 ? "0x" : base === 2 ? "0b" : "";
+          label.innerHTML += ` <p>${
+            prefijo + valor.toString(base)
+          } es en decimal ${valor} y se corresponde con el tipo ${typeof valor}</p>`;
+        } else {
+          label.innerHTML += `<p>${valor} se corresponde con el tipo ${valor}</p>`;
+        }
+      }
+
+      const datos = [
+        [10, 0],
+        [-10, 0],
+        [10.5, 0],
+        [-10, 5, 0],
+        [0o343, 8],
+        [0b1000, 2],
+        [0x3fe21, 16],
+        [Infinity, 0],
+        [NaN, 0],
+        [true, 0],
+        [undefined, 0],
+        [null, 0],
+        [1n, 0],
+      ];
+
+      for (const dato of datos) {
+        mostrarInfo(dato[0], dato[1]);
+      }
+
+      
+    </script>
+  </body>
+</html>

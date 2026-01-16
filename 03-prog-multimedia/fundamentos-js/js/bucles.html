@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucles en JS</title>
+</head>
+<body>
+
+
+<script>
+
+    //BUCLES
+
+    let numeros = [1, 2, 3, 4, 5];
+    numeros.forEach(numero => console.log(numero));
+
+    //Ejemplo de map
+    const duplicados = numeros.map(numero => numero * 2); //Crea un nuevo array, no modifica el original
+    console.log(`Numeros: ${numeros}`);
+    console.log(`Duplicados: ${duplicados}`);
+
+    numeros = duplicados; //aquí ya se podría modificar el array original cambiando a tipo let no const
+
+    console.log(`Numeros: ${numeros}`);
+
+
+
+    // Ejemplo de filter (crea un nuevo array con los elementos que pasan el filtro)
+    const pares = numeros.filter(numero => numero % 2 === 0);
+    console.log(pares); // [2, 4]
+
+    //for of para recorrer indice y números a través del método entries de array
+
+    for (const [indice, num] of duplicados.entries()) {
+        console.log(`Índice: ${indice}, Número: ${num} `);
+    }
+
+
+    //BUCLES PARA RECORRER OBJETOS
+
+    //1. for ... in para recorrer las claves del objeto
+    const persona = {
+        nombre:"Ana", 
+        edad: 28,
+        ciudad: 'Madrid'
+    };
+
+    for (const clave in persona) {
+        
+        console.log(`Clave: ${clave}, Valor:${persona[clave]}`);
+        
+    }
+    
+
+
+    //for ... of para recorrer las claves del objeto
+
+    for (const clave of Object.keys(persona)) {
+        console.log(`Clave: ${clave}, Valor:${persona[clave]}`);
+    }
+
+    //forEach con Object.entries()
+
+    Object.entries(persona).forEach(
+        ([clave, valor]) => {
+        console.log(`Clave: ${clave}, Valor:${persona[clave]}`)
+    });
+    
+    
+
+
+
+</script>
+
+    
+</body>
+</html>

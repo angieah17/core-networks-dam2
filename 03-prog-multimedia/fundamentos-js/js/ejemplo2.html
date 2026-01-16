@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos en JS</title>
+</head>
+<body>
+
+
+<script>
+
+    const persona = {
+        nombre: 'Juan',
+        edad: 30,
+
+        saludar: function(){
+            return `Hola, soy ${this.nombre}`; //Importante se debe poner el this siempre
+        }
+
+    };
+
+
+    console.log(persona.nombre); //Para acceder a los atributos del objeto
+    console.log(persona.saludar()); //Para acceder a las funciones del objeto
+
+
+    function sumar(a = 0, b =0) {
+        return a + b;
+    }
+
+    const multiplicar = (a, b) => a * b; //Funciones flecha 
+
+    console.log(multiplicar(1, 2));
+
+
+
+    const ahora1 = new Date();
+    const ahora2 = Date();
+    console.log(typeof ahora1);
+    console.log(typeof ahora2);
+
+
+    let x = 2;
+    x /= 3;
+    console.log(x);
+
+
+    console.log({} == {});
+    
+    const arra1 = [1, '2', 3];
+    const arra2 = [1, 2, 3];
+
+    const sonIguales = JSON.stringify(arra1) === JSON.stringify(arra2);
+    console.log(sonIguales);
+
+
+    const valorDefinido = "valor existente"
+
+  
+
+
+
+</script>
+
+    
+</body>
+</html>

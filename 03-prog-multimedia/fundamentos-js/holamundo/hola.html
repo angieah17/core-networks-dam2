@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Mundo</title>
+</head>
+<body>
+
+    <h1 id="titulo"></h1>
+
+    <p id="texto">aiudai</p> <!-- se sobreescribe el contenido con JS -->
+
+
+    <script>
+
+        //Si constantemente se va a usar el objeto se guarda en una constante
+        const tituloLabel = document.getElementById('titulo');
+        
+        const parrafoLabel =  document.getElementById('texto');
+
+        tituloLabel.innerHTML = '001 - Hola MUndo';
+        parrafoLabel.innerHTML = 'Hola Mundo';
+
+        //DIFERENCIA VAR Y LET
+
+        var v1 = 0;
+        var v2 = 3;
+
+        //let v3 = 5; Let No permite redeclarar
+        //let v3 = 4;
+       
+        console.log(v3);
+        //console.log(v4); let se debe inicializar primero antes de su uso
+        var v3;
+        let v4;
+
+        
+        
+
+
+        if(true){
+            var variable = 0;
+        }
+
+        console.log(variable);
+
+
+        if(true){
+            let otro = 0;
+        }
+
+        //console.log(otro);
+
+
+
+        //const
+
+        /*Usar UPPER como las final de java si realmente son variables que no van a cambiar. Ej: PI
+        */
+
+        console.log(5 == '5');
+        console.log(5 === '5');
+
+        
+
+
+
+
+    </script>
+
+    
+</body>
+</html>

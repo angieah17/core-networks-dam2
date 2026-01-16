@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplo 1</title>
+  </head>
+  <body>
+    <h1>Título: Ejemplo 1</h1>
+
+    <script>
+      //¿Cómo se declaran las variables en JS?
+      /*v0 = 7;
+    let v0 = 0;
+    Se declara la variable de forma local, en general no se recomienda declarar 
+    con var porque es una declaración global de la variable.
+    
+    También con el let si se declara la variable sale el error en caso de usarla antes de su declaración.
+   
+    v1 = 75; //Tipado dinámico: es decir, el tipo se pone solo.
+    console.log(v1);
+    v1 = 'hola';
+    console.log(v1); */
+
+      //DECLARACIÓN CON VAR
+
+      //1. Se puede redeclarar, no se recomienda su uso (solo con var)
+
+      var v1 = "variable 1";
+      var v1 = "nueva variable 1";
+      console.log(v1);
+
+      //2. Se le puede asignar un nuevo valor
+
+      var v2 = 7;
+      v2 = 9;
+      console.log(v2);
+
+      //let no permite redeclarar, pero sí se le puede asignar un nuevo valor
+
+      //CONCATENACIÓN DE TEXTOS
+
+      let edad = 10;
+      let nombre = "Pedro";
+      let persona = nombre + " tiene " + edad + " años.\n";
+
+      console.log(persona);
+
+      persona = `${nombre} tiene ${edad} años.`;
+
+      console.log(persona);
+
+      //VARIABLES
+
+      let estado1 = true;
+
+      if (estado1) {
+        estado2 = false; // no se recomienda porque se declara la variable en estado global.
+      }
+
+      console.log(estado2);
+
+      //ARRAYS
+
+      const frutas = ["peras", "manzanas", "plátanos"]; //const frutas siempre va a estar apuntando a este array, pero el contenido del array si puede cambiar, es diferente a frutas = []; porque esto es un nuevo array
+
+      frutas.push("cereza"); //añade el elemento al final
+
+      console.log(frutas);
+      frutas.unshift("fruta tropical"); //inserta un elemento al principio
+      frutas.pop(); //borra el último elemento
+
+      //for of similar al for each en java
+      for (const fruta of frutas) {
+        console.log("- " + fruta);
+      }
+
+      //for que recorre cada indice
+      for (let i = 0; i < frutas.length; i++) {
+        console.log("- " + frutas[i]);
+      }
+
+      //FUNCIÓN
+
+      /*Se pueden usar en cualquier parte, no tiene que estar primero declarada y después usada.
+       */
+
+      muestraArray(frutas);
+
+      function muestraArray(array = ["defecto1", "defecto2"]) {
+        for (const elemento of array) {
+          console.log("* " + elemento);
+        }
+      }
+
+      muestraArray(); //Saca los valores por defecto que se han definido en la función
+
+      //MOSTRAR CON UN WHILE
+
+      let i = 0;
+
+      while (i < frutas.length) {
+        console.log(`x - ${frutas[i++]}`);
+      }
+
+      //MOSTRAR CON DO WHILE
+      i = 0;
+
+      do {
+        console.log(`*** - ${frutas[i++]}`);
+      } while (i < frutas.length);
+
+      const numeros = [1, -5, 3, 6, 0, 2];
+
+      //cuenta números positivos
+
+      let cuenta = 0;
+
+      for (const numero of numeros) {
+        if (numero > 0) {
+          cuenta++;
+        }
+      }
+
+      console.log(`Cantidad números positivos: ${cuenta}`);
+      console.log("Cantidad números positivos:", cuenta); //Otra forma de hacerlo concatenando
+
+      //duplica el valor de los números
+
+      for (let i = 0; i < numeros.length; i++) {
+        numeros[i] *= 2;
+      }
+
+      console.log(`Números Duplicados: ${numeros}`);
+
+      //elimina los números negativos
+
+      for (let i = numeros.length - 1; i >= 0; i--) {
+        if (numeros[i] < 0) {
+          numeros.splice(i, 1); //método para borrar un elemento en una posición específica, necesita el índice
+        }
+      }
+
+      //Otra forma de hacerlo:
+
+      /*for (let i = 0; i < numeros.length; i++) {
+        if (numeros[i] < 0) {
+          numeros.splice(i, 1); //método para borrar un elemento en una posición específica
+          i--;
+        }
+      }*/
+
+      console.log(`Números Eliminados: ${numeros}`);
+    </script>
+  </body>
+</html>
