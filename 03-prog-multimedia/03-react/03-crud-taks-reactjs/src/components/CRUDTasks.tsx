@@ -50,7 +50,7 @@ export default function CRUDTasks() {
 
     //II. METODOS
 
-    //1. Mostrar lista de tareas en tabla
+    //1. Mostrar lista de tareas en tabla (GET)
 
     const BASE_URL = "https://6968b37169178471522b4549.mockapi.io/api/v1/tasks/tasks"
 
@@ -58,13 +58,28 @@ export default function CRUDTasks() {
         setError(null);
         setLoading(true);
         try {
-            
             const response = await axios.get<Task[]>(BASE_URL);
             setTasks(response.data);
-
         } catch (error) {
             console.error(error);
-            setError('Error mostrando lista de tareas.')
+            setError('Error mostrando lista de tareas.');
+        } finally{
+            setLoading(false);
+        }
+    }
+
+    //2. Ver detalle de una tarea (GET)
+    const verDetalle = async (id: number) => {
+        setError(null);
+        setLoading(true);
+        try {
+            const response = await axios.get<Task>(`${BASE_URL}/${id}`);
+            setTask(response.data);
+        } catch (error) {
+            console.error(error);
+            setError('Error mostrando lista de tareas.');
+        }finally{
+            setLoading(false); 
         }
     }
 
@@ -91,7 +106,7 @@ export default function CRUDTasks() {
                         <td>{t.priority}</td>
                         <td>{t.completed ? 'Sí' : 'No'}</td>
                         <td>
-                            <a>Ver</a>
+                            <a onClick={() => verDetalle(t.id)}>Ver</a>
                             <a>Editar</a>
                             <a>Borrar</a>
                         </td>
@@ -101,6 +116,20 @@ export default function CRUDTasks() {
             </tbody>
         </table>   
         <button onClick={mostrarListaDeTareas}>Cargar Tareas</button> 
+
+        {
+            tasks.map(
+                t => 
+                <ul key={t.id}>
+                    <li>{t.id}</li>
+                    <li>{t.title}</li>
+                    <li>{t.assignedTo}</li>
+                    <li>{t.priority}</li>
+                    <li>{t.completed ? 'Sí' : 'No'}</li>
+                </ul>
+            )
+        }
+        <button>Ocultar</button>
     </>
   )
 }
