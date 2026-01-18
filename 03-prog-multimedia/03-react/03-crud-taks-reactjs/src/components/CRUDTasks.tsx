@@ -82,8 +82,12 @@ export default function CRUDTasks() {
             setLoading(false); 
         }
     }
+    //2.1 Ocultar detalle de una tarea
+    const ocultarDetalle = () => {
+        setTask(null);
+    }
 
-    //e. Elimiar tarea (DELETE)
+    //3. Elimiar tarea (DELETE)
     const eliminarTarea = async (id:number) => {
         
         const tarea = tasks.find(t => t.id === id);
@@ -105,6 +109,28 @@ export default function CRUDTasks() {
         }finally{
             setLoading(false); 
         }
+    }
+
+    //4. Crear nueva tarea (POST)
+    const crearNuevaTarea = async (taskData: TaskForm) => {
+        setError(null);
+        setLoading(true);
+        try {
+            const response = await axios.post<Task>(BASE_URL, taskData);
+            setTasks([...tasks, response.data]);
+            resetForm();
+        } catch (error) {
+            console.error(error);
+            setError('Error creando nueva tarea');
+        }finally{
+            setLoading(false); 
+        }
+    }
+
+    //III. METODOS AUXILIARES
+    const resetForm = () => {
+        setEditingId(null);
+        setFormData(formDataEnBlanco);
     }
 
   return (
@@ -153,7 +179,17 @@ export default function CRUDTasks() {
                 </ul>
             )
         }
-        <button>Ocultar</button>
+        <button onClick={ocultarDetalle}>Ocultar</button>
+
+        <form action="">
+            <label>Título: </label>
+            <input type="text" placeholder="Title" />
+            <label>Título: </label> 
+            <input type="text" placeholder="Assigned to" />
+            <label>Prioridad: </label> 
+        </form>
+
+
     </>
   )
 }
