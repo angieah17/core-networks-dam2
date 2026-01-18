@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 /*Recordar que es necesario instalar: npm install axios*/
@@ -58,7 +59,8 @@ export default function CRUDTasks() {
         setLoading(true);
         try {
             
-            //const response = await axios.
+            const response = await axios.get<Task[]>(BASE_URL);
+            setTasks(response.data);
 
         } catch (error) {
             console.error(error);
@@ -80,20 +82,25 @@ export default function CRUDTasks() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a>Ver</a>
-                        <a>Editar</a>
-                        <a>Borrar</a>
-                    </td>
-                </tr>
+                {tasks.map(
+                    t => 
+                    <tr key={t.id}>
+                        <td>{t.id}</td>
+                        <td>{t.title}</td>
+                        <td>{t.assignedTo}</td>
+                        <td>{t.priority}</td>
+                        <td>{t.completed ? 'Sí' : 'No'}</td>
+                        <td>
+                            <a>Ver</a>
+                            <a>Editar</a>
+                            <a>Borrar</a>
+                        </td>
+                    </tr>
+                )
+                }
             </tbody>
-        </table>    
+        </table>   
+        <button onClick={mostrarListaDeTareas}>Cargar Tareas</button> 
     </>
   )
 }
