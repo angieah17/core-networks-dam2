@@ -130,9 +130,9 @@ export default function CRUDTasks() {
                         <td>{t.priority}</td>
                         <td>{t.completed ? 'Sí' : 'No'}</td>
                         <td>
-                            <a onClick={() => verDetalle(t.id)}>Ver</a>
-                            <a>Editar</a>
-                            <a onClick={() => eliminarTarea(t.id)}>Borrar</a>
+                            <button onClick={() => verDetalle(t.id)}>Ver</button>
+                            <button>Editar</button>
+                            <button onClick={() => eliminarTarea(t.id)}>Borrar</button>
                         </td>
                     </tr>
                 )
