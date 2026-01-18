@@ -45,8 +45,11 @@ export default function CRUDTasks() {
         priority: '',
         completed: false,
     }
-
+    
     const [formData, setFormData] = useState<TaskForm>(formDataEnBlanco);
+
+    //7. validaciones
+    const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
     //II. METODOS
 
@@ -167,7 +170,7 @@ export default function CRUDTasks() {
     //2. Guardar los cambios Submit
     const handleSubmit = (e:FormEvent) => {
         e.preventDefault();
-
+        if (!validateBasic()) return;
         //Falta aquí agregar las validaciones
 
         if (editingId) {
@@ -178,6 +181,39 @@ export default function CRUDTasks() {
     }
 
     //3. Validaciones
+    // Validación básica
+    const validateBasic = (): boolean => {
+        if (!formData.title.trim() || !formData.assignedTo.trim()) {
+            setError('El título y asignado son obligatorios');
+            return false;
+        }
+        return true;
+    };
+
+    //Validaciones avanzadas
+    const validateForm = (): boolean => {
+    const errors: string[] = [];
+
+    if (formData.title.length < 5) {
+      errors.push('El título debe tener mínimo 5 caracteres');
+    }
+    if (formData.title.length > 100) {
+      errors.push('El título debe tener máximo 100 caracteres');
+    }
+    if (formData.assignedTo.length < 3) {
+      errors.push('El asignado debe tener mínimo 3 caracteres');
+    }
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(formData.assignedTo)) {
+      errors.push('El asignado solo puede contener letras y espacios');
+    }
+    if (!['Baja', 'Media', 'Alta', 'Urgente'].includes(formData.priority)) {
+      errors.push('Debe seleccionar una prioridad válida');
+    }
+
+    setValidationErrors(errors);
+    return errors.length === 0;
+  };
+
 
   return (
     <>
