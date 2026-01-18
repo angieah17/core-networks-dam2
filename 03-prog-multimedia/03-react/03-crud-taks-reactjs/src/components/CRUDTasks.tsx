@@ -45,10 +45,38 @@ export default function CRUDTasks() {
 
     const [formData, setFormData] = useState<TaskForm>(formDataEnBlanco);
 
+    //II. METODOS
+
+    //1. Mostrar lista de tareas en tabla
 
   return (
     <>
-    
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Asignado a</th>
+                    <th>Prioridad</th>
+                    <th>Completada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a>Ver</a>
+                        <a>Editar</a>
+                        <a>Borrar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
     </>
   )
 }
