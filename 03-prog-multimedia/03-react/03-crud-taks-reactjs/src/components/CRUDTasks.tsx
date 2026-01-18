@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+/*Recordar que es necesario instalar: npm install axios*/
+
 type Task = {
     id: number,
     title: string,
@@ -48,6 +50,21 @@ export default function CRUDTasks() {
     //II. METODOS
 
     //1. Mostrar lista de tareas en tabla
+
+    const BASE_URL = "https://6968b37169178471522b4549.mockapi.io/api/v1/tasks/tasks"
+
+    const mostrarListaDeTareas = async () => {
+        setError(null);
+        setLoading(true);
+        try {
+            
+            //const response = await axios.
+
+        } catch (error) {
+            console.error(error);
+            setError('Error mostrando lista de tareas.')
+        }
+    }
 
   return (
     <>
