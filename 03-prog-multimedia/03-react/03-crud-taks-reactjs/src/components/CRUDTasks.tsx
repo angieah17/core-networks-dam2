@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 /*Recordar que es necesario instalar: npm install axios*/
 
@@ -127,11 +127,57 @@ export default function CRUDTasks() {
         }
     }
 
+    //5. Editar tarea (PUT)
+    const editarTarea = (tarea: Task) => {
+        setEditingId(tarea.id);
+        setFormData(
+            {
+                title: tarea.title,
+                assignedTo: tarea.assignedTo,
+                priority: tarea.priority,
+                completed: false,
+            }
+        )
+    }
+
+    const guardarCambios =  async (id:number, taskData:TaskForm) => {
+        setError(null);
+        setLoading(true);
+        try {
+            const response = await axios.put<Task>(`${BASE_URL}/${id}`, taskData);
+            setTasks(tasks.map(t => t.id === id ? response.data : t));
+            if(task?.id === id) setTask(response.data);
+            resetForm();
+        } catch (error) {
+            console.error(error);
+            setError('Error editando tarea');
+        }finally{
+            setLoading(false); 
+        }
+    }
+
     //III. METODOS AUXILIARES
+
+    //1. resetForm
     const resetForm = () => {
         setEditingId(null);
         setFormData(formDataEnBlanco);
     }
+
+    //2. Guardar los cambios Submit
+    const handleSubmit = (e:FormEvent) => {
+        e.preventDefault();
+
+        //Falta aquí agregar las validaciones
+
+        if (editingId) {
+            guardarCambios(editingId, formData);
+        } else {
+            crearNuevaTarea(formData);
+        }
+    }
+
+    //3. Validaciones
 
   return (
     <>
