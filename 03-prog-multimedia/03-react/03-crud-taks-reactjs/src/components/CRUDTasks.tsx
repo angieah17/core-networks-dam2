@@ -77,7 +77,31 @@ export default function CRUDTasks() {
             setTask(response.data);
         } catch (error) {
             console.error(error);
-            setError('Error mostrando lista de tareas.');
+            setError('Error mostrando detalle de la tarea: ' + id);
+        }finally{
+            setLoading(false); 
+        }
+    }
+
+    //e. Elimiar tarea (DELETE)
+    const eliminarTarea = async (id:number) => {
+        
+        const tarea = tasks.find(t => t.id === id);
+
+        if(!confirm(`¿Eliminar la tarea [${tarea?.title}]?`)) return;
+
+        setError(null);
+        setLoading(true);
+        try {
+            //En el delete no se recomienda tipar
+            await axios.delete(`${BASE_URL}/${id}`);
+            setTasks(tasks.filter(t => t.id !== id));
+            
+            //Si se están mostrando los detalles de una tarea para que también se actualice ese estado
+            if(task?.id === id) setTask(null);
+        } catch (error) {
+            console.error(error);
+            setError(`Error eliminando la tarea: [${tarea?.title}]`);
         }finally{
             setLoading(false); 
         }
@@ -108,7 +132,7 @@ export default function CRUDTasks() {
                         <td>
                             <a onClick={() => verDetalle(t.id)}>Ver</a>
                             <a>Editar</a>
-                            <a>Borrar</a>
+                            <a onClick={() => eliminarTarea(t.id)}>Borrar</a>
                         </td>
                     </tr>
                 )
