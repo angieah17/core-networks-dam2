@@ -18,10 +18,13 @@ type TaskForm = {
     completed: boolean,
 }
 
+type SortBy = 'title' | 'assignedTo' | 'priority' | null;
+type SortOrder = 'asc' | 'desc';
+
 
 export default function CRUDTasks() {
 
-    //I.Definicion de los estados
+    //I.DEFINICION DE LOS ESTADOS
 
     //1. task
     const [task, setTask] = useState<Task | null>(null);
@@ -37,7 +40,16 @@ export default function CRUDTasks() {
 
     //5. editingId (si es null CREA y si es number ACTUALIZA)
     const [editingId, setEditingId] = useState<number | null>(null);
-    //6. formData
+
+    //6. searchTeam (para hacer la busqueda)
+     const [searchTerm, setSearchTerm] = useState<string>('');
+    //7. sortBy (para ordenar por)
+    const [sortBy, setSortBy] = useState<SortBy>(null);
+    //8. sortOrder (orden asc o desc)
+    const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+    //9.validationErrors
+    const [validationErrors, setValidationErrors] = useState<string[]>([]);
+    //10. formData
 
     const formDataEnBlanco : TaskForm = {
         title: '',
@@ -48,10 +60,43 @@ export default function CRUDTasks() {
     
     const [formData, setFormData] = useState<TaskForm>(formDataEnBlanco);
 
-    //7. validaciones
-    const [validationErrors, setValidationErrors] = useState<string[]>([]);
+    //II. VALIDACIONES
 
-    //II. METODOS
+    //1. Validación básica
+    const validateBasic = (): boolean => {
+        if (!formData.title.trim() || !formData.assignedTo.trim()) {
+            setError('El título y asignado son obligatorios');
+            return false;
+        }
+        return true;
+    };
+
+    //2. Validaciones avanzadas
+    const validateForm = (): boolean => {
+    const errors: string[] = [];
+
+    if (formData.title.length < 5) {
+      errors.push('El título debe tener mínimo 5 caracteres');
+    }
+    if (formData.title.length > 100) {
+      errors.push('El título debe tener máximo 100 caracteres');
+    }
+    if (formData.assignedTo.length < 3) {
+      errors.push('El asignado debe tener mínimo 3 caracteres');
+    }
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(formData.assignedTo)) { //Expresión REGEX
+      errors.push('El asignado solo puede contener letras y espacios');
+    }
+    if (!['Baja', 'Media', 'Alta', 'Urgente'].includes(formData.priority)) {
+      errors.push('Debe seleccionar una prioridad válida');
+    }
+
+    setValidationErrors(errors);
+    return errors.length === 0; //Devuele true si no hay elementos en el array
+  };
+
+
+    //III. METODOS
 
     //1. Mostrar lista de tareas en tabla (GET)
 
@@ -159,7 +204,7 @@ export default function CRUDTasks() {
         }
     }
 
-    //III. METODOS AUXILIARES
+    //IV. METODOS AUXILIARES
 
     //1. resetForm
     const resetForm = () => {
@@ -180,39 +225,6 @@ export default function CRUDTasks() {
         }
     }
 
-    //3. Validaciones
-    // Validación básica
-    const validateBasic = (): boolean => {
-        if (!formData.title.trim() || !formData.assignedTo.trim()) {
-            setError('El título y asignado son obligatorios');
-            return false;
-        }
-        return true;
-    };
-
-    //Validaciones avanzadas
-    const validateForm = (): boolean => {
-    const errors: string[] = [];
-
-    if (formData.title.length < 5) {
-      errors.push('El título debe tener mínimo 5 caracteres');
-    }
-    if (formData.title.length > 100) {
-      errors.push('El título debe tener máximo 100 caracteres');
-    }
-    if (formData.assignedTo.length < 3) {
-      errors.push('El asignado debe tener mínimo 3 caracteres');
-    }
-    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(formData.assignedTo)) {
-      errors.push('El asignado solo puede contener letras y espacios');
-    }
-    if (!['Baja', 'Media', 'Alta', 'Urgente'].includes(formData.priority)) {
-      errors.push('Debe seleccionar una prioridad válida');
-    }
-
-    setValidationErrors(errors);
-    return errors.length === 0;
-  };
 
 
   return (
