@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ríos del mundo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ríos del mundo</h1>
+  <button id="cargar">Cargar ríos</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    const boton = document.getElementById('cargar');
+    const lista = document.getElementById('lista');
+
+    async function cargarRios() {
+      lista.innerHTML = '<li>Cargando ríos…</li>';
+
+      try {
+        const respuesta = await fetch('http://localhost:8087/api/');
+        if (!respuesta.ok) {
+          throw new Error('Error en la petición');
+        }
+
+        const rios = await respuesta.json();
+
+        lista.innerHTML = '';
+
+        rios.forEach(rio => {
+          const li = document.createElement('li');
+          li.textContent = `${rio.nombre_rio} (${rio.longitud_rio} km)  ${rio.paises_rio}`;
+          lista.appendChild(li);
+        });
+
+      } catch (error) {
+        lista.innerHTML = `<li class="error">No se pudieron cargar los datos</li>`;
+        console.error(error);
+      }
+    }
+
+    boton.addEventListener('click', cargarRios);
+  </script>
+
+</body>
+</html>
