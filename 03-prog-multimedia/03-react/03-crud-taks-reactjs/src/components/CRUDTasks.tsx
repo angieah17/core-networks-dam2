@@ -183,9 +183,10 @@ export default function CRUDTasks() {
                 title: tarea.title,
                 assignedTo: tarea.assignedTo,
                 priority: tarea.priority,
-                completed: false,
+                completed: tarea.completed,
             }
-        )
+        );
+        setValidationErrors([]);
     }
 
     const guardarCambios =  async (id:number, taskData:TaskForm) => {
@@ -215,8 +216,9 @@ export default function CRUDTasks() {
     //2. Guardar los cambios Submit
     const handleSubmit = (e:FormEvent) => {
         e.preventDefault();
+        
         if (!validateBasic()) return;
-        //Falta aquí agregar las validaciones
+        if (!validateForm()) return;
 
         if (editingId) {
             guardarCambios(editingId, formData);
@@ -224,11 +226,58 @@ export default function CRUDTasks() {
             crearNuevaTarea(formData);
         }
     }
+    
+    //V. METODOS AVANZADOS
+    //1. Búsqueda/Filtrado en tiempo real
+    const filteredTasks = tasks.filter(t => {
+    const search = searchTerm.toLowerCase();
+    return (
+        t.title.toLowerCase().includes(search) ||
+        t.assignedTo.toLowerCase().includes(search) ||
+        t.priority.toLowerCase().includes(search)
+        );
+    });    
 
+    //2. Ordenar tareas (POR REVISAR ) 
+    const priorityOrder = { 'Baja': 1, 'Media': 2, 'Alta': 3, 'Urgente': 4 };
+  
+    const sortedTasks = [...filteredTasks].sort((a, b) => {
+        if (!sortBy) return 0;
+
+        if (sortBy === 'priority') {
+        const aVal = priorityOrder[a.priority as keyof typeof priorityOrder] || 0;
+        const bVal = priorityOrder[b.priority as keyof typeof priorityOrder] || 0;
+        return sortOrder === 'asc' ? aVal - bVal : bVal - aVal;
+    }
+
+    const aVal = a[sortBy].toLowerCase();
+    const bVal = b[sortBy].toLowerCase();
+    
+    if (sortOrder === 'asc') {
+        return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+        } else {
+        return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
+        }
+     });
+
+    const handleSort = (field: SortBy) => {
+        if (sortBy === field) {
+        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+        setSortBy(field);
+        setSortOrder('asc');
+        }
+    };
+
+    const getSortIndicator = (field: SortBy) => {
+        if (sortBy !== field) return '';
+        return sortOrder === 'asc' ? ' ↑' : ' ↓';
+    };
 
 
   return (
-    <>
+    <>  
+    <h1></h1>
         <table>
             <thead>
                 <tr>
