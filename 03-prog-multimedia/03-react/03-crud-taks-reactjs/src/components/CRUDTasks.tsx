@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, type FormEvent } from "react";
+import './CRUDTasks.css'
 
 /*Recordar que es necesario instalar: npm install axios*/
 
@@ -140,7 +141,7 @@ export default function CRUDTasks() {
         
         const tarea = tasks.find(t => t.id === id);
 
-        if(!confirm(`¿Eliminar la tarea [${tarea?.title}]?`)) return;
+        if(!confirm(`¿Eliminar la tarea '${tarea?.title}'?`)) return;
 
         setError(null);
         setLoading(true);
@@ -220,7 +221,7 @@ export default function CRUDTasks() {
         if (!validateBasic()) return;
         if (!validateForm()) return;
 
-        if (editingId) {
+        if (editingId !== null) {
             guardarCambios(editingId, formData);
         } else {
             crearNuevaTarea(formData);
@@ -276,63 +277,124 @@ export default function CRUDTasks() {
 
 
   return (
-    <>  
-    <h1></h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Título</th>
-                    <th>Asignado a</th>
-                    <th>Prioridad</th>
-                    <th>Completada</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {tasks.map(
-                    t => 
-                    <tr key={t.id}>
-                        <td>{t.id}</td>
-                        <td>{t.title}</td>
-                        <td>{t.assignedTo}</td>
-                        <td>{t.priority}</td>
-                        <td>{t.completed ? 'Sí' : 'No'}</td>
-                        <td>
-                            <button onClick={() => verDetalle(t.id)}>Ver</button>
-                            <button>Editar</button>
-                            <button onClick={() => eliminarTarea(t.id)}>Borrar</button>
-                        </td>
-                    </tr>
-                )
-                }
-            </tbody>
-        </table>   
-        <button onClick={mostrarListaDeTareas}>Cargar Tareas</button> 
+    <div className="crud-container">  
 
-        {
-            tasks.map(
-                t => 
-                <ul key={t.id}>
-                    <li>{t.id}</li>
-                    <li>{t.title}</li>
-                    <li>{t.assignedTo}</li>
-                    <li>{t.priority}</li>
-                    <li>{t.completed ? 'Sí' : 'No'}</li>
-                </ul>
-            )
-        }
-        <button onClick={ocultarDetalle}>Ocultar</button>
+        <h1>Gestión de Tareas del Equipo</h1>
+        
+        <form onSubmit={handleSubmit}>
+            <h2>{editingId ? 'Editar Tarea' : 'Crear Nueva Tarea'}</h2>
 
-        <form action="">
+            {validationErrors.length > 0 && (
+              <div className="validation-errors">
+                {validationErrors.map((err, idx) => (
+                  <div key={idx} className="validation-error">{err}</div>
+                ))}
+              </div>
+            )}
+
             <label>Título: </label>
-            <input type="text" placeholder="Title" />
-            <label>Título: </label> 
-            <input type="text" placeholder="Assigned to" />
+            <input type="text" placeholder="Título de la tarea" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})}/>
+
+            <label>Asignado a: </label> 
+            <input type="text" placeholder="Nombre de la persona a asignarsela" value={formData.assignedTo} onChange={(e) => setFormData({...formData, assignedTo: e.target.value})}/>
+
             <label>Prioridad: </label> 
+            <select value={formData.priority} onChange={(e) => setFormData({...formData, priority: e.target.value})}>
+                <option value="">Selecciona prioridad</option>
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+                <option value="Urgente">Urgente</option>
+            </select>
+
+            
+            <label >Completada</label>
+            <input type="checkbox" checked={formData.completed} onChange={(e) => setFormData({...formData, completed: e.target.checked})}/>
+            
+            <button type="submit" disabled={loading} className="btn-primary">{editingId ? 'Guardar cambios': 'Crear Tarea'}</button>
+            {editingId && (
+                <button type="button" onClick={resetForm} className="btn-secondary">
+                    Cancelar
+                </button>
+            )} 
         </form>
+        
+        {task &&
+                (
+                <div className="detail-container">
+                <h2>Detalle de la Tarea</h2>
+                <ul>
+                    <li><strong>ID:</strong> {task.id}</li>
+                    <li><strong>Título:</strong> {task.title}</li>
+                    <li><strong>Asignado a:</strong> {task.assignedTo}</li>
+                    <li><strong>Prioridad:</strong> {task.priority}</li>
+                    <li><strong>Completada:</strong> {task.completed ? 'Sí' : 'No'}</li>
+                </ul>
+                <button onClick={ocultarDetalle} className="btn-secondary">Ocultar</button>
+                </div>
+          )}
+
+        <div className="controls">
+            
+            <input type="text" placeholder="Buscar por título, asignado o prioridad..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+            
+            <div className="sort-buttons">
+                <button onClick={() => handleSort('title')} className="btn-sort">
+                    Ordenar por Título{getSortIndicator('title')}
+                </button>
+                <button onClick={() => handleSort('assignedTo')} className="btn-sort">
+                    Ordenar por Asignado{getSortIndicator('assignedTo')}
+                </button>
+                <button onClick={() => handleSort('priority')} className="btn-sort">
+                    Ordenar por Prioridad{getSortIndicator('priority')}
+                </button>
+            </div>
+            {error && <div className="error-message">{error}</div>}
+            
+            <button onClick={mostrarListaDeTareas} disabled={loading} className="btn-primary">{loading ? 'Cargando' : 'Cargar Tareas'}</button> 
+
+        </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Título</th>
+                        <th>Asignado a</th>
+                        <th>Prioridad</th>
+                        <th>Completada</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sortedTasks.map(
+                        t => 
+                        <tr key={t.id}>
+                            <td>{t.id}</td>
+                            <td>{t.title}</td>
+                            <td>{t.assignedTo}</td>
+                            <td>{t.priority}</td>
+                            <td>{t.completed ? 'Sí' : 'No'}</td>
+                            <td>
+                                <button onClick={() => verDetalle(t.id)}>Ver</button>
+                                <button onClick={() => editarTarea(t)} >Editar</button>
+                                <button onClick={() => eliminarTarea(t.id)}>Eliminar</button>
+                            </td>
+                        </tr>
+                    )
+                    }
+                </tbody>
+            </table> 
+            
+            {sortedTasks.length === 0 && tasks.length > 0 && (
+            <p className="no-results">No se encontraron tareas con ese criterio de búsqueda</p>
+          )}  
+            
+
+            
 
 
-    </>
+
+    </div>
   )
 }

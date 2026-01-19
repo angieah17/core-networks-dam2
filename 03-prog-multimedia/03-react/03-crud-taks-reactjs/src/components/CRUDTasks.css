@@ -1,0 +1,13 @@
+.validation-errors {
+  background-color: #ffe5e5;
+  border: 1px solid #ff4d4d;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.validation-error {
+  color: #d10000;
+  font-weight: bold;
+  margin: 3px 0;
+}
