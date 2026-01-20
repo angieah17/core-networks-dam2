@@ -231,27 +231,27 @@ export default function CRUDTasks() {
     //V. METODOS AVANZADOS
     //1. Búsqueda/Filtrado en tiempo real
     const filteredTasks = tasks.filter(t => {
-    const search = searchTerm.toLowerCase();
-    return (
-        t.title.toLowerCase().includes(search) ||
-        t.assignedTo.toLowerCase().includes(search) ||
-        t.priority.toLowerCase().includes(search)
-        );
+        const search = searchTerm.toLowerCase();
+        return (
+            t.title.toLowerCase().includes(search) ||
+            t.assignedTo.toLowerCase().includes(search) ||
+            t.priority.toLowerCase().includes(search)
+            );
     });    
 
     //2. Ordenar tareas (POR REVISAR ) 
     const priorityOrder = { 'Baja': 1, 'Media': 2, 'Alta': 3, 'Urgente': 4 };
   
     const sortedTasks = [...filteredTasks].sort((a, b) => {
-        if (!sortBy) return 0;
+        if (!sortBy) return 0; //esto agregar
 
         if (sortBy === 'priority') {
-        const aVal = priorityOrder[a.priority as keyof typeof priorityOrder] || 0;
-        const bVal = priorityOrder[b.priority as keyof typeof priorityOrder] || 0;
+            const aVal = priorityOrder[a.priority as keyof typeof priorityOrder] || 0;
+            const bVal = priorityOrder[b.priority as keyof typeof priorityOrder] || 0;
         return sortOrder === 'asc' ? aVal - bVal : bVal - aVal;
     }
 
-    const aVal = a[sortBy].toLowerCase();
+    const aVal = a[sortBy].toLowerCase(); //ordenar por titulo o asignado a
     const bVal = b[sortBy].toLowerCase();
     
     if (sortOrder === 'asc') {
@@ -263,10 +263,10 @@ export default function CRUDTasks() {
 
     const handleSort = (field: SortBy) => {
         if (sortBy === field) {
-        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
         } else {
-        setSortBy(field);
-        setSortOrder('asc');
+            setSortBy(field);
+            setSortOrder('asc');
         }
     };
 
@@ -285,7 +285,7 @@ export default function CRUDTasks() {
             <h2>{editingId ? 'Editar Tarea' : 'Crear Nueva Tarea'}</h2>
 
             {validationErrors.length > 0 && (
-              <div className="validation-errors">
+              <div>
                 {validationErrors.map((err, idx) => (
                   <div key={idx} className="validation-error">{err}</div>
                 ))}
@@ -311,9 +311,10 @@ export default function CRUDTasks() {
             <label >Completada</label>
             <input type="checkbox" checked={formData.completed} onChange={(e) => setFormData({...formData, completed: e.target.checked})}/>
             
-            <button type="submit" disabled={loading} className="btn-primary">{editingId ? 'Guardar cambios': 'Crear Tarea'}</button>
+            <button type="submit" disabled={loading}>{editingId ? 'Guardar cambios': 'Crear Tarea'}</button>
+
             {editingId && (
-                <button type="button" onClick={resetForm} className="btn-secondary">
+                <button type="button" onClick={resetForm}>
                     Cancelar
                 </button>
             )} 
@@ -321,7 +322,7 @@ export default function CRUDTasks() {
         
         {task &&
                 (
-                <div className="detail-container">
+                <div>
                 <h2>Detalle de la Tarea</h2>
                 <ul>
                     <li><strong>ID:</strong> {task.id}</li>
@@ -351,7 +352,7 @@ export default function CRUDTasks() {
             </div>
             {error && <div className="error-message">{error}</div>}
             
-            <button onClick={mostrarListaDeTareas} disabled={loading} className="btn-primary">{loading ? 'Cargando' : 'Cargar Tareas'}</button> 
+            <button onClick={mostrarListaDeTareas} disabled={loading}>{loading ? 'Cargando' : 'Cargar Tareas'}</button> 
 
         </div>
 

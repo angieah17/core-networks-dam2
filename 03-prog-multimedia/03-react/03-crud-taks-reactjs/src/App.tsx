@@ -1,13 +1,13 @@
 
 import './App.css'
-import CRUDTasks2 from './components/CRUDTasks2'
+import CRUDTasks from './components/CRUDTasks'
 
 function App() {
 
 
   return (
     <>
-      <CRUDTasks2/>
+      <CRUDTasks/>
     </>
   )
 }

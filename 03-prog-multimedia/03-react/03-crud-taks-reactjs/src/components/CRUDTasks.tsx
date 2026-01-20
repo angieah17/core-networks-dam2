@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, type FormEvent } from "react";
+import './CRUDTasks2.css'
 
 type Task = {
     id: number,
@@ -88,7 +89,7 @@ export default function CRUDTasks() {
     }
 
         //2.1 Ocultar detalle de una tarea
-        function ocultarDetalle(id:number) {
+        function ocultarDetalle() {
             setTask(null);
         }
 
@@ -177,7 +178,9 @@ export default function CRUDTasks() {
     function handleSubmit(e: FormEvent) {
         e.preventDefault(); //evitar la recaga automática
 
-        //AGREGAR AQUI LAS VALIDACIONES
+        //antes de subir valido si pasan los datos ingresados
+        if(!validacionesBasicas()) return;
+        if(!validacionesAvanzadas()) return;
 
         if(editingId !== null){
             guardarCambios(editingId, formData);
@@ -188,17 +191,185 @@ export default function CRUDTasks() {
 
     //IV. VALIDACIONES 
     //1. Validacion basica
+
+    function validacionesBasicas() : boolean {
+        if(!formData.title.trim() || !formData.assignedTo.trim()){
+            setError('El título y el asignado son obligatorios.')
+            return false;
+        }
+            return true;
+    }
+
     //2. Validaciones avanzadas
+    function validacionesAvanzadas(): boolean {
+
+        /* errors.push('')
+        REGEX.test(formData.assignedTo)
+        ['Baja', 'Media'].includes(formData.priority) */
+
+        //2.1 Crear el array de errores
+        const errors : string [] = [];
+
+        //2.2 Validacion del titulo que ingresa en el formulario
+
+        if(formData.title.length < 5) {
+            errors.push('El título deben tener mínimo 5 caracteres.'); //se agrega a la lista de errores
+        }
+
+        //2.3 Validación titulo
+
+        if(formData.title.length > 100){
+            errors.push('El título no puede exceder de 100 caracteres');
+        }
+
+        //2.4 Validacion de asignado a:
+        if(formData.assignedTo.length < 3){
+            errors.push('El asignado a debe tener por lo menos 3 caracteres');
+        }
+
+        //2.5 Expresion regular
+        //Si este patrón no existe testealo porque da error
+        if(!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(formData.assignedTo)){
+            errors.push('El asignado a solo puede contener letras y espacios.')
+        }
+
+        //2.6 Prioridad 
+
+        if(!['Baja', 'Media', 'Alta', 'Urgente'].includes(formData.priority)){
+            errors.push('La prioridad debe ser uno de los valores permitidos.')
+        }
+
+        //3. Se incluye el array de errores en el estado de validacion de errores
+
+        setValidationErrors(errors);
+
+        return errors.length === 0; //Devuelve true si no hay errores
+    }
 
     //V. METODOS AVANZADOS
     //1. Filtrar tiempo real
+
+    //Sacar una lista filtrada de las tasks
+
+    const filteredTasks : Task [] = tasks.filter(
+        t => {
+            const search = searchTerm.toLocaleLowerCase(); //guardo la variable en loweCase
+            return (
+                t.title.toLocaleLowerCase().includes(search) ||
+                t.assignedTo.toLowerCase().includes(search) ||
+                t.priority.toLowerCase().includes(search)
+            );
+        }
+    ) 
+
     //2. Ordenar tareas
 
 
-
   return (
-    <div>
+    <>
+        <h1>Gestión de Tareas del Equipo</h1>
+        
+        <section className="formulario">
+            
+            <h2>FORMULARIO</h2>
 
-    </div>
+            {validationErrors.length > 0 && 
+                <ul>
+                    {validationErrors.map(
+                        (err, idx) => <li key={idx} className="validation-error">{err}</li>
+                    )}
+                </ul>
+            }
+            {error && <div className="validation-error">{error}</div>}
+
+            <form onSubmit={handleSubmit}>
+                <label>Título: </label>
+                <input type="text" placeholder="Título" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})}/>
+
+                <label>Asignado a :</label>
+                <input type="text" placeholder="Aginado a" value={formData.assignedTo} onChange={(e) => setFormData({...formData, assignedTo: e.target.value})} />
+
+                <label >Prioridad: </label>
+                <select value={formData.priority} onChange={(e) => setFormData({...formData, priority: e.target.value})}>
+                    <option value="">Selecciona prioridad</option>
+                    <option value="Baja">Baja</option>
+                    <option value="Media">Media</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Urgente">Urgente</option>
+                </select>
+
+                <label>Completada: </label>
+                <input type="checkbox" checked={formData.completed} onChange={(e) => setFormData({...formData, completed: e.target.checked})} />
+
+                <button type="submit" disabled={loading}>{editingId ? 'Guardar cambios' : 'Crear Tarea'}</button>
+                
+                {
+                    editingId && <button type="button" onClick={resetForm}>Cancelar</button>
+                }
+                
+            </form>
+        </section>
+
+        
+        {task && 
+            <section>
+            <h2>DETALLE</h2>
+
+            <ul>
+                <li><span>ID: </span>{task.id}</li>
+                <li><span>Título: </span>{task.title}</li>
+                <li><span>Asignado a: </span>{task.assignedTo}</li>
+                <li><span>Prioridad: </span>{task.priority}</li>
+                <li><span>Completada: </span>{task.completed ? 'Sí' : 'No'}</li>
+            </ul>
+
+            <button onClick={ocultarDetalle}>Ocultar</button>
+            </section>
+        }
+
+        <section className="controles">
+
+            <label>Buscar: </label>
+            <input type="text" placeholder="Buscar por título o asignado o prioridad" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+
+            <div>REVISAR SI SE PUEDE AGREGAR LO DE ORDENAR</div>
+
+            <button onClick={listarTareas} disabled={loading}>{loading ? 'Cargando' : 'Cargar Tareas'}</button>
+        </section>
+    
+        <section className="tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Título</th>
+                        <th>Asignado a</th>
+                        <th>Prioridad</th>
+                        <th>Completada</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        tasks.map(
+                            t => <tr key={t.id}>
+                                <td>{t.id}</td>
+                                <td>{t.title}</td>
+                                <td>{t.assignedTo}</td>
+                                <td>{t.priority}</td>
+                                <td>{t.completed ? 'Sí' : 'No'}</td>
+                                <td>
+                                    <button onClick={() => verDetalle(t.id)}>Ver</button>
+                                    <button onClick={() => editarTarea(t)}>Editar</button>
+                                    <button onClick={() => eliminarTarea(t.id)}>Eliminar</button>
+                                </td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+        </section>
+
+    </>
   )
 }
