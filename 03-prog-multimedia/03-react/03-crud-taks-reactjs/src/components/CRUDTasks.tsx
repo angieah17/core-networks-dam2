@@ -45,11 +45,11 @@ export default function CRUDTasks() {
     const [formData, setFormData] = useState<TaskForm>(formDataEnBlanco);
     //7. searchTerm
     const [searchTerm, setSearchTerm] = useState<string>('')
-    //8. sortBy
+    //8. sortBy (POR REVISAR SI SE PUEDE AGREGAR)
     const [sortBy, setSortBy] = useState<SortBy>(null);
     //9. sortOrder
     const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
-    //10. validationErrors
+    //10. validationErrors (POR REVISAR SI SE PUEDE AGREGAR)
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
     //II. METODOS
@@ -251,7 +251,7 @@ export default function CRUDTasks() {
 
     //Sacar una lista filtrada de las tasks
 
-    const filteredTasks : Task [] = tasks.filter(
+    const filteredTasks = tasks.filter(
         t => {
             const search = searchTerm.toLocaleLowerCase(); //guardo la variable en loweCase
             return (
@@ -262,8 +262,8 @@ export default function CRUDTasks() {
         }
     ) 
 
-    //2. Ordenar tareas
-
+    //2. Ordenar tareas REVISAR SI SE PUEDE AGREGAR
+    
 
   return (
     <>
