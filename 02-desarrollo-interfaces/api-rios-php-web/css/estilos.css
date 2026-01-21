@@ -48,7 +48,7 @@ body {
 /* Layout */
 header {
     background-color: var(--primary);
-    
+   
     padding: var(--space-m) 0;
 }
 body.abierto header{
@@ -70,7 +70,7 @@ h4 {
 
 h1 {
     text-align: center;
-    font-size: calc(var(--uni) * 6);font-weight: 100;color:var(--bg)
+    font-size: calc(var(--uni) * 3);font-weight: 100;color:var(--bg)
 }
 
 h2 {
@@ -85,26 +85,31 @@ p {
     margin-bottom: var(--space-s);
 }
 
-/* Animacion carga: funcion @keyframes */
-
-@keyframes carga {
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(360deg);
-    }
+main#root{
+width:80%;
+max-width: 1200px;
+margin:auto;
+display: flex;
+gap: 12px;
 }
 
-#cargando{
-    display: flex;justify-content: center;
-    flex-direction: column;
-    align-items: center;
+#rios{
+    flex-grow: 1;
 }
-#cargando *{
-display: block;
+
+#seccion{
+    flex-grow: 4;
 }
-#cargando img{
-    animation:carga 0.7s linear infinite ;
-    width:30px;pointer-events: none;
+
+#rios li{
+    border: 1px solid var(--accent);
+    border-radius: 9px;
+    padding: 2px 10px;
+    margin-top: 5px;
+    cursor: pointer;
 }
+
+#salida {
+    border: 1px solid red;
+}
+
