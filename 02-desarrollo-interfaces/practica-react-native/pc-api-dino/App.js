@@ -79,9 +79,19 @@ export default function App() {
   }
 
   // Estados globales
-  if (cargando) {
+  /* if (cargando) {
     return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
-  }
+  } */
+
+  if (cargando) {
+  return (
+    <ScrollView contentContainerStyle={styles.loading}>
+      <ActivityIndicator size="large" />
+      <Text style={styles.loadingText}>Cargando dinosaurios...</Text>
+    </ScrollView>
+  );
+}
+
 
   if (error) {
     return <Text style={{ padding: 20 }}>{error}</Text>;
@@ -196,5 +206,19 @@ const getStyles = () =>
     region: {
       marginTop: 10,
     },
+   loading: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingTop: 50,
+},
+
+loadingText: {
+  marginTop: 10,
+  fontSize: 16,
+},
+
    
+   
+    
   });
