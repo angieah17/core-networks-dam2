@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Text,
   ScrollView,
@@ -7,10 +7,10 @@ import {
   StyleSheet,
   Image,
   Dimensions,
-} from 'react-native';
+} from "react-native";
 
-const API_BASE = 'https://dinoapi.brunosouzadev.com/api/dinosaurs';
-const { width } = Dimensions.get('window');
+const API_BASE = "https://dinoapi.brunosouzadev.com/api/dinosaurs";
+const { width } = Dimensions.get("window");
 
 export default function App() {
   const styles = getStyles();
@@ -29,7 +29,7 @@ export default function App() {
         const json = await res.json();
         setLista(json);
       } catch {
-        setError('Error cargando la lista de dinosaurios');
+        setError("Error cargando la lista de dinosaurios");
       } finally {
         setCargando(false);
       }
@@ -49,7 +49,7 @@ export default function App() {
         setImgSize({
           width: width * 0.9,
           height: h * ratio * 0.9,
-          alignSelf: 'center',
+          alignSelf: "center",
           marginVertical: 15,
         });
       },
@@ -57,10 +57,10 @@ export default function App() {
         setImgSize({
           width: width * 0.9,
           height: width * 0.6,
-          alignSelf: 'center',
+          alignSelf: "center",
           marginVertical: 15,
         });
-      }
+      },
     );
   }, [dinoSeleccionado]);
 
@@ -72,7 +72,7 @@ export default function App() {
       const json = await res.json();
       setDinoSeleccionado(json[0]);
     } catch {
-      setError('Error cargando el dinosaurio');
+      setError("Error cargando el dinosaurio");
     } finally {
       setCargando(false);
     }
@@ -84,17 +84,21 @@ export default function App() {
   } */
 
   if (cargando) {
-  return (
-    <ScrollView contentContainerStyle={styles.loading}>
-      <ActivityIndicator size="large" />
-      <Text style={styles.loadingText}>Cargando dinosaurios...</Text>
-    </ScrollView>
-  );
-}
-
+    return (
+      <ScrollView contentContainerStyle={styles.loading}>
+        <ActivityIndicator size="large" />
+        <Text style={styles.loadingText}>Cargando dinosaurios...</Text>
+      </ScrollView>
+    );
+  }
 
   if (error) {
-    return <Text style={{ padding: 20 }}>{error}</Text>;
+    return (
+      <ScrollView contentContainerStyle={styles.error}>
+        <Text style={styles.errorTitle}>¡Ups!</Text>
+        <Text style={styles.errorText}>{error}</Text>
+      </ScrollView>
+    );
   }
 
   // Listado
@@ -131,9 +135,7 @@ export default function App() {
         <Text style={styles.backText}>← Volver</Text>
       </TouchableOpacity>
 
-      <Text style={styles.detailTitle}>
-        {dinoSeleccionado.name}
-      </Text>
+      <Text style={styles.detailTitle}>{dinoSeleccionado.name}</Text>
 
       {imgSize && (
         <Image
@@ -143,13 +145,9 @@ export default function App() {
         />
       )}
 
-      <Text style={styles.description}>
-        {dinoSeleccionado.description}
-      </Text>
+      <Text style={styles.description}>{dinoSeleccionado.description}</Text>
 
-      <Text style={styles.region}>
-        Región: {dinoSeleccionado.region}
-      </Text>
+      <Text style={styles.region}>Región: {dinoSeleccionado.region}</Text>
     </ScrollView>
   );
 }
@@ -163,26 +161,26 @@ const getStyles = () =>
 
     title: {
       fontSize: 22,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       marginBottom: 20,
     },
 
     counter: {
       fontSize: 16,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       marginBottom: 10,
     },
 
     item: {
       padding: 15,
       marginBottom: 10,
-      backgroundColor: '#eee',
+      backgroundColor: "#eee",
       borderRadius: 6,
     },
 
     itemTitle: {
       fontSize: 16,
-      fontWeight: 'bold',
+      fontWeight: "bold",
     },
 
     back: {
@@ -190,12 +188,12 @@ const getStyles = () =>
     },
 
     backText: {
-      color: 'blue',
+      color: "blue",
     },
 
     detailTitle: {
       fontSize: 24,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       marginBottom: 10,
     },
 
@@ -206,19 +204,32 @@ const getStyles = () =>
     region: {
       marginTop: 10,
     },
-   loading: {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  paddingTop: 50,
-},
+    loading: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      paddingTop: 50,
+    },
 
-loadingText: {
-  marginTop: 10,
-  fontSize: 16,
-},
+    loadingText: {
+      marginTop: 10,
+      fontSize: 16,
+    },
+    error: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 20,
+    },
 
-   
-   
-    
+    errorTitle: {
+      fontSize: 22,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+
+    errorText: {
+      fontSize: 16,
+      textAlign: "center",
+    },
   });
