@@ -15,17 +15,18 @@ public class ServidorSocket {
 		try (ServerSocket serverSocket = new ServerSocket(PUERTO);) {
 			
 			System.out.println("=== SE HA INICIADO EL SERVIDOR ===");
-			
+			System.out.printf("Esperando conexiones en el puerto: %s%n", PUERTO);
 			while (true) {
 				Socket clienteSocket = serverSocket.accept();
-				
-				Thread hiloCliente = new Thread(new ManejadorCliente(clienteSocket));
+				System.out.println("Cliente conectado desde: " + clienteSocket.getInetAddress());
+                
+				Thread hiloCliente = new Thread(new GestorServerSocket(clienteSocket));
 				hiloCliente.start();
 			}
 			
 			
 		} catch (IOException e) {
-			System.out.println("Error iniciando el servidor");
+			System.out.println("Error iniciando el servidor: " + e.getMessage());
 			
 		}
 		

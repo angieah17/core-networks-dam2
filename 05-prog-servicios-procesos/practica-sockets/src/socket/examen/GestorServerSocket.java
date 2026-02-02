@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Iterator;
 import java.util.Random;
 
 public class GestorServerSocket implements Runnable {
@@ -35,21 +34,24 @@ public class GestorServerSocket implements Runnable {
 				
 				//2. Procesar el mensaje del cliente
 				
-				//String respuesta = procesarMensaje(mensajeRecibido);
+				String respuesta = procesarMensaje(mensajeRecibido);
 
 				//3. Mostrar la respuesta enviada al cliente
 				
-				//System.out.printf("Hilo: [%s] Petición enviada: %s%n", Thread.currentThread().getName(), respuesta);
+				System.out.printf("Hilo: [%s] Respuesta enviada: %s%n", Thread.currentThread().getName(), respuesta);
 				
 				//4.Enviar la respuesta al cliente
-				
+				salida.println(respuesta);
 				//5. Si es mensaje #Fin# cerrar la conexión.
-				
+				if (mensajeRecibido.equals("#Fin#")) {
+					System.out.println("✗ Cliente desconectado: " + socket.getInetAddress());
+					break;
+				}
 			}
 			
 			
 		} catch (IOException e) {
-			System.out.println("Error manejando el cliente.");
+			System.out.println("Error manejando el cliente: " + e.getMessage());
 		}
 		
 		
@@ -144,7 +146,7 @@ public class GestorServerSocket implements Runnable {
 	        
 	        // Generar número aleatorio
 	        Random random = new Random();
-	        int numeroAleatorio = random.nextInt(min, max);
+	        int numeroAleatorio = random.nextInt(min, max + 1);
 	        return String.valueOf(numeroAleatorio);
 	    }
 
