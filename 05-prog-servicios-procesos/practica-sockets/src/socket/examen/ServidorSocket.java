@@ -2,25 +2,37 @@ package socket.examen;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ServidorSocket {
 	
 	//1. Atributos
-	private ServerSocket server;
-	private int port;
+	private static final int PUERTO = 8081;
 	
-	
-	//2. Constructor del Servidor, se crea a partir del puerto
-	
-	public ServidorSocket(int port) throws IOException {
-		this.port = port;
-		server = new ServerSocket(port);
-	}
-
-
 
 
 	public static void main(String[] args) {
+		
+		
+		try (ServerSocket serverSocket = new ServerSocket(PUERTO)) {
+			
+			System.out.println("====SERVIDOR SOCKET INICIADO ====");
+			
+			//Bucle infinito para aceptar múltiples clientes
+			
+			while (true) {
+				Socket clienteSocket = serverSocket.accept();
+				
+				//Thread hiloCliente = new Thread();
+				
+			}
+			
+		} catch (IOException e) {
+			
+		} finally {
+			
+		}
+		
 		
 	}
 }
