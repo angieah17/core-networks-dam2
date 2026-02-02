@@ -23,16 +23,14 @@ public class ServidorSocket {
 			while (true) {
 				Socket clienteSocket = serverSocket.accept();
 				
-				//Thread hiloCliente = new Thread();
+				Thread hiloCliente = new Thread(new ManejadorCliente(clienteSocket));
+				hiloCliente.start();
 				
 			}
 			
 		} catch (IOException e) {
-			
-		} finally {
-			
-		}
-		
+			System.out.println("Error en el servidor");
+		} 
 		
 	}
 }
