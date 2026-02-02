@@ -23,7 +23,7 @@ public class ServidorSocket2 {
 				Socket clienteSocket = serverSocket.accept(); //Bloquea el hilo hasta que llega un cliente y cuando se genera devuelve un objeto socket
 				
 				//Por cada clienteSocket (por cada conexión establecida se crea un hilo)
-				Thread hiloCliente = new Thread(new ManejadorCliente(clienteSocket));
+				Thread hiloCliente = new Thread(new GestorSocketServer2(clienteSocket));
 				hiloCliente.start();
 				
 			}
