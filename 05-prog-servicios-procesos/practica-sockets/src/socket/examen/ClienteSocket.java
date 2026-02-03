@@ -34,6 +34,14 @@ public class ClienteSocket {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			Scanner scanner = new Scanner(System.in)) {
 			
+			 System.out.println("=== CLIENTE SOCKET CONECTADO ===");
+            System.out.printf("Conectado al servidor en %s : %d%n", HOST, PUERTO);
+            System.out.println("Ejemplos de mensajes:");
+            System.out.println("  - #Listado números#2#11#");
+            System.out.println("  - #Numero aleatorio#3#20#");
+            System.out.println("  - #Fin#");
+            System.out.println("  - Cualquier otro mensaje");
+			
 			String mensajeEnviado;
 			boolean continuar = true;
 			
