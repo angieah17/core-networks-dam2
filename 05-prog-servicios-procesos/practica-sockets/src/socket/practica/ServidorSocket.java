@@ -1,4 +1,4 @@
-package socker.practica;
+package socket.practica;
 
 import java.io.IOException;
 import java.net.ServerSocket;

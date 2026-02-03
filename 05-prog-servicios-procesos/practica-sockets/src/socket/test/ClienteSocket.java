@@ -1,4 +1,4 @@
-package socker.practica;
+package socket.test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,56 +10,54 @@ import java.util.Scanner;
 
 public class ClienteSocket {
 	
-	public static final String HOST = "localhost";
-	public static final int PUERTO = 8082;
-
+	private static final int PUERTO = 8083;
+	private static final String HOST = "localhost";
+	
 	public static void main(String[] args) {
 		
 		try (Socket socket = new Socket(HOST, PUERTO);
 				PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
 				BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				Scanner scanner = new Scanner(System.in);) {
-			
 			System.out.println("=== CLIENTE SOCKET CONECTADO ===");
-			System.out.printf("Conectado al servidor %s : %d%n", HOST, PUERTO);
-			
+			System.out.printf("Cliente conectado desde: %s%n", socket.getInetAddress());
 			
 			String mensajeEnviado;
 			boolean continuar = true;
 			
+			
 			while (continuar) {
-				
-				//1. Introducir mensaje
-				System.out.println("Introduzca el mensaje: ");
+				//1. Introducir mensaje 
+				System.out.println("Introduce el mensaje: ");
 				mensajeEnviado = scanner.nextLine();
 				
-				//2. Enviar el mensaje
-				System.out.printf("Mensaje enviado: %s%n", mensajeEnviado);
+				//2. Enviar mensaje al server
+				
+				System.out.println("Mensaje enviado: " + mensajeEnviado);
 				salida.println(mensajeEnviado);
 				
-				//3. Leer respuesta del servidor
+				//3. Leer mensaje recibido del server
 				String respuesta = entrada.readLine();
-				System.out.printf("Mensaje recibido: %s%n", respuesta);
+				System.out.println("Mensaje recibido: " + respuesta);
+				
+				//4. Procesar respuesta
 				
 				if(respuesta.equals("#Error#")) {
 					System.out.println("Mensaje no adecuadamente formateado para su tratamiento.");
-				} else if (respuesta.equals("#Finalizado#")) {
-					System.out.println("Fin de la conexión");
+				} else if(respuesta.equals("#Finalizado#")) {
 					continuar = false;
-				}
+					System.out.println("Fin de la conexión.");
+				} 
 				
 			}
 			
 			
-			
 		} catch (UnknownHostException e) {
-			System.out.printf("Error host desconocido %s%n", e.getMessage() );
-		} catch  (IOException e){
-			System.out.printf("Error E/S: %s%n", e.getMessage() );
+			System.out.println("Error estableciendo conexión con el HOST: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("Erro E/S: " + e.getMessage());
 		}
 		
 	}
-	
-	
 	
 }
