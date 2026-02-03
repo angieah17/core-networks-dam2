@@ -9,70 +9,69 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class ClienteSocket {
-	//1. Atributos
 	
-	private static final String HOST = "localhost"; 
-	private static final int PUERTO = 8081;
+	public static final String HOST = "localhost";
+	public static final int PUERTO = 8082;
 	
-	//2. Método para procesar respuesta
-	
-	private static void procesarRespuesta (String mensajeEnviado, String respuesta) {
+	private String procesarMensaje (String mensajeEnviado, String respuesta) {
+		
 		if(respuesta.equals("#Error#")) {
-			System.out.println("Mensaje no cumple el formato para su tratamiento");
+			System.out.println("Mensaje no adecuadamente formateado para su tratamiento.");
 		} else if (respuesta.equals("#Finalizado#")) {
 			System.out.println("Fin de la conexión");
-		} else {
-			//la respuesta es válida:
-			System.out.println("Resultado: " + respuesta);
+		}else {
+			System.out.printf(respuesta);
 		}
+		
+		return null;
 	}
-	
 	
 	public static void main(String[] args) {
 		
 		try (Socket socket = new Socket(HOST, PUERTO);
-			PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
-			BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			Scanner scanner = new Scanner(System.in);
-				) {
+				PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
+				BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				Scanner scanner = new Scanner(System.in);) {
 			
 			System.out.println("=== CLIENTE SOCKET CONECTADO ===");
-			System.out.printf("Conectado al servidor en %s : %d", HOST, PUERTO);
+			System.out.printf("Conectado al servidor %s : %d%n", HOST, PUERTO);
+			
 			
 			String mensajeEnviado;
 			boolean continuar = true;
 			
 			while (continuar) {
-				System.out.print("Introduce mensaje: ");
+				
+				//1. Introducir mensaje
+				System.out.println("Introduzca el mensaje: ");
 				mensajeEnviado = scanner.nextLine();
 				
-				//1.1 Enviar el mensaje al servidor
+				//2. Enviar el mensaje
+				System.out.printf("Mensaje enviado: %s%n", mensajeEnviado);
+				salida.print(mensajeEnviado);
 				
-				salida.println(mensajeEnviado); //El método println() añade un salto de línea (\n), que el servidor puede detectar con readLine()
-				System.out.printf("El mensaje enviado es: %s%n", mensajeEnviado);
-				
-				//1.2 Recibir respuesta del servidor
+				//3. Leer respuesta del servidor
 				String respuesta = entrada.readLine();
-				System.out.printf("La respuesta recibida del servidor es: %s%n", respuesta);
+				System.out.printf("Mensaje recibido: %s%n", respuesta);
 				
-				//1.3 Procesar la respuesta según el tipo
-				procesarRespuesta(mensajeEnviado, respuesta);
-				
-				//1.4 Si recibimos #Finalizado#, terminamos el loop
-				if(respuesta.equals("#Finalizado#")) continuar = false;
+				if(respuesta.equals("#Error#")) {
+					System.out.println("Mensaje no adecuadamente formateado para su tratamiento.");
+				} else if (respuesta.equals("#Finalizado#")) {
+					System.out.println("Fin de la conexión");
+					continuar = false;
+				}
 				
 			}
 			
 			
+			
 		} catch (UnknownHostException e) {
-			System.out.printf("No se pudo encontrar el servidor");
-		} catch (IOException e) {
-			System.out.printf("Error de E/S: %s", e.getMessage() );
+			System.out.printf("Error host desconocido %s%n", e.getMessage() );
+		} catch  (IOException e){
+			System.out.printf("Error E/S: %s%n", e.getMessage() );
 		}
-				
+		
 	}
-	
-	
 	
 	
 	

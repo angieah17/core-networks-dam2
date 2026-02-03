@@ -5,23 +5,26 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServidorSocket {
-	private static final int PUERTO = 8081;
+	
+	private static final int PUERTO = 8082;
 	
 	public static void main(String[] args) {
 		
 		try (ServerSocket serverSocket = new ServerSocket(PUERTO);) {
 			
-			System.out.println("=== SERVIDOR INICIADO ===");
-			
+			System.out.println("===SERVIDOR INICIADO===");
+			System.out.printf("Esperando conexiones en el puerto: %s%n", PUERTO);
 			while (true) {
-				Socket clienteSocket = serverSocket.accept();
+				Socket socketCliente = serverSocket.accept();
+				System.out.printf("Cliente conectado desde: %s", socketCliente.getInetAddress());
+				Thread clienteHilo = new Thread(new GestorServerSocket(socketCliente));
+				clienteHilo.start();
 				
-				Thread hiloCliente = new Thread (new ManejadorCliente(clienteSocket));
-				hiloCliente.start();
 			}
 			
 		} catch (IOException e) {
-			System.out.println("Error en el servidor");
+			System.out.println("Error inicando el servidor: " + e.getMessage());
+
 		}
 		
 		

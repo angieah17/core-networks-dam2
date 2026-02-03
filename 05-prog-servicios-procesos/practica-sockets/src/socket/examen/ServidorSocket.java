@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import socker.practica.ManejadorCliente;
 
 public class ServidorSocket {
 	
