@@ -12,20 +12,7 @@ public class ClienteSocket {
 	
 	public static final String HOST = "localhost";
 	public static final int PUERTO = 8082;
-	
-	private String procesarMensaje (String mensajeEnviado, String respuesta) {
-		
-		if(respuesta.equals("#Error#")) {
-			System.out.println("Mensaje no adecuadamente formateado para su tratamiento.");
-		} else if (respuesta.equals("#Finalizado#")) {
-			System.out.println("Fin de la conexión");
-		}else {
-			System.out.printf(respuesta);
-		}
-		
-		return null;
-	}
-	
+
 	public static void main(String[] args) {
 		
 		try (Socket socket = new Socket(HOST, PUERTO);
