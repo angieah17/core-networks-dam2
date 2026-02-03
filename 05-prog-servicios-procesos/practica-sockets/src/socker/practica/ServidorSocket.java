@@ -16,7 +16,7 @@ public class ServidorSocket {
 			System.out.printf("Esperando conexiones en el puerto: %s%n", PUERTO);
 			while (true) {
 				Socket socketCliente = serverSocket.accept();
-				System.out.printf("Cliente conectado desde: %s", socketCliente.getInetAddress());
+				System.out.printf("Cliente conectado desde: %s%n", socketCliente.getInetAddress());
 				Thread clienteHilo = new Thread(new GestorServerSocket(socketCliente));
 				clienteHilo.start();
 				

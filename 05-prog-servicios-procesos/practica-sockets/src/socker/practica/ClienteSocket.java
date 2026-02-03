@@ -35,7 +35,7 @@ public class ClienteSocket {
 				
 				//2. Enviar el mensaje
 				System.out.printf("Mensaje enviado: %s%n", mensajeEnviado);
-				salida.print(mensajeEnviado);
+				salida.println(mensajeEnviado);
 				
 				//3. Leer respuesta del servidor
 				String respuesta = entrada.readLine();
