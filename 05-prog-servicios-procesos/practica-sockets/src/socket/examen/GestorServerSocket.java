@@ -68,7 +68,7 @@ public class GestorServerSocket implements Runnable {
             return "#Finalizado#";
         }
         
-        String[] partes = mensaje.split("#");
+        String[] partes = mensaje.split("#"); 
         
         //Valida el formato básico para poder acceder al comando sin ArrayOut...
         if (partes.length < 3) {
