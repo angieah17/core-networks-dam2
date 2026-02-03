@@ -77,20 +77,6 @@ public class GestorServerSocket implements Runnable {
         
         String comando = partes[1];
         
-        if (comando.equals("Listado números")) { //Caso 2
-            return procesarListadoNumeros(partes);
-        } else if (comando.equals("Numero aleatorio")) { //Caso 3
-            return procesarNumeroAleatorio(partes);
-        } else {
-            return "#Error#";
-        }
-    }
-	
-	
-	
-	
-	private String procesarListadoNumeros (String [] partes) {
-		
         // VALIDACIÓN 1: Verificar que tenga exactamente 4 parámetros
         if (partes.length != 4) {
             return "#Error#";
@@ -110,45 +96,31 @@ public class GestorServerSocket implements Runnable {
             return "#Error#";
         }
         
-        // Generar listado en el formato que piden
-        StringBuilder resultado = new StringBuilder();
-        for (int i = inicio; i <= fin; i++) {
-            resultado.append(i);
-            if (i < fin) {
-                resultado.append("|");
+        
+        if (comando.equals("Listado números")) { //Caso 2
+        	
+            StringBuilder resultado = new StringBuilder();
+            for (int i = inicio; i <= fin; i++) {
+                resultado.append(i);
+                if (i < fin) {
+                    resultado.append("|");
+                }
             }
-        }
-        return resultado.toString();
-		    
-		
-	}
-
-	
-	 private String procesarNumeroAleatorio(String[] partes) {
-	        
-		 // Validación de formato
-	        if (partes.length != 4) {
-	            return "#Error#";
-	        }
-	        
-	        // Validación de números
-	        if (!partes[2].matches("-?\\d+") || !partes[3].matches("-?\\d+")) {
-	            return "#Error#";
-	        }
-	        
-	        int min = Integer.parseInt(partes[2]);
-	        int max = Integer.parseInt(partes[3]);
-	        
-	        // Validación de rango
-	        if (min > max) {
-	            return "#Error#";
-	        }
-	        
-	        // Generar número aleatorio
-	        Random random = new Random();
-	        int numeroAleatorio = random.nextInt(min, max + 1);
+            return resultado.toString();
+            
+        } else if (comando.equals("Numero aleatorio")) { //Caso 3
+        	
+        	Random random = new Random();
+	        int numeroAleatorio = random.nextInt(inicio, fin + 1);
 	        return String.valueOf(numeroAleatorio);
-	    }
+	        
+        } else {
+            return "#Error#";
+        }
+    }
+	
+	
+	
 
 	
 }
