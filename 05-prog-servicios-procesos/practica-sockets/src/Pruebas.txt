@@ -1,0 +1,13 @@
+#Listado números#2#11#
+#Numero aleatorio#3#20#
+
+-- MAL FORMATEADO
+Hola
+
+--ERROR
+#Listado números#5#
+#Listado números#10#5#
+Listado números 5 10
+
+--FIN CORRECTO
+#Fin#
