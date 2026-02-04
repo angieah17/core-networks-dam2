@@ -8,6 +8,20 @@
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/estilos.css" rel="stylesheet">
 
+    <style>
+      @media print {/* reglas específicas para impresión */
+        body{
+          color: blue;
+          font-size: 20pt; /* se usa esta medida al tratarse de print, en screen no se usa */
+        }
+
+        button{
+          display: none; /* ocultar botones al imprimir */
+        }
+        
+      }
+    </style>
+
 </head>
 
 <body>
@@ -49,6 +63,13 @@
   </footer>
 </section>
 
+<script>
+  function imprimir(params) {
+    window.print();
+  }
+
+  document.getElementById("guardar-pdf").addEventListener("click", imprimir);
+</script>
 
 
     <script src="js/script.js"></script>
