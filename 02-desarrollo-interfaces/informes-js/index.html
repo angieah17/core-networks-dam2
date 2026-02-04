@@ -10,14 +10,69 @@
 
     <style>
       @media print {/* reglas específicas para impresión */
-        body{
-          color: blue;
-          font-size: 20pt; /* se usa esta medida al tratarse de print, en screen no se usa */
-        }
 
-        button{
-          display: none; /* ocultar botones al imprimir */
-        }
+        /* Márgenes y tamaño de página */
+      @page {
+        margin: 2cm;
+        size: A4;
+      }
+
+      /* Cuerpo */
+    body {
+      color: #333;
+      font-size: 11pt;
+      line-height: 1.4;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Ocultar elementos innecesarios */
+    nav {
+      display: none;
+    }
+
+    button {
+      display: none;
+    }
+
+    /* Título */
+    h1 {
+      font-size: 18pt;
+      margin-bottom: 10pt;
+      border-bottom: 2px solid #333;
+      padding-bottom: 8pt;
+    }
+
+    /* Párrafo de fecha */
+    .obs {
+      font-size: 10pt;
+      color: #666;
+      margin-bottom: 15pt;
+    }
+
+    /* Tabla */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20pt;
+      font-size: 10pt;
+    }
+
+    thead {
+      background-color: #e0e0e0;
+      font-weight: bold;
+    }
+
+    th, td {
+      border: 1px solid #999;
+      padding: 6pt 8pt;
+      text-align: center;
+    }
+
+    th {
+      background-color: #d0d0d0;
+      font-weight: bold;
+    }
+
         
       }
     </style>
