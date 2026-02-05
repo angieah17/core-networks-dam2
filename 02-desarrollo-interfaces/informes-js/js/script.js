@@ -1,5 +1,8 @@
 const URL_DATOS = "datos/calificaciones.json";
 
+let arrayPromedios = [];
+
+
 //1. Selección de elementos del DOM
 const btnGenerar = document.getElementById("generar-informe");
 const btnGuardar = document.getElementById("guardar-pdf");
@@ -49,7 +52,8 @@ function limpiarInforme() {
 
 function generarTabla(alumnado) {
   limpiarInforme(); // limpiar informe antes de generar uno nuevo
-
+  //array de promedios
+  arrayPromedios = [];
   
   const sumaAsignatura = { matematicas: 0, lengua: 0, historia: 0, ciencias: 0 }; // objeto para acumular sumas por asignatura
   const nAlumnos = alumnado.length; // número de alumnos
@@ -83,13 +87,19 @@ function generarTabla(alumnado) {
     ASIGNATURAS.forEach((a, i) => { sumaAsignatura[a] += valores[i]; }); // sumar la nota del alumno a la suma de la asignatura, con esto se lleva la cuenta de la suma total por asignatura
   });
 
+  
   // promedios por asignatura
   ASIGNATURAS.forEach(a => {
+
     const li = document.createElement('li'); // crear elemento lista para el promedio de la asignatura
     const prom = nAlumnos ? sumaAsignatura[a] / nAlumnos : 0; // calcular el promedio de la asignatura, si no hay alumnos el promedio es 0
+    arrayPromedios.push(prom);
+    console.log(arrayPromedios);
     li.textContent = `${NOMBRE_ASIG[a]}: ${formatNumber(prom)}`; // poner el texto con el nombre de la asignatura y el promedio formateado
     promediosAsignatura.appendChild(li); // añadir el elemento lista a la lista de promedios
   });
+
+  
 }
 
 //2.6 Generar informe completo
@@ -108,6 +118,8 @@ async function generarInforme() {
     btnGenerar.textContent = 'Generar informe';
   }
 }
+
+
 
 //3. Eventos
 btnGenerar.addEventListener('click', generarInforme); //cuando se hace click en el botón, se genera el informe
