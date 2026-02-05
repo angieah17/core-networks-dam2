@@ -1,0 +1,6 @@
+#Suma#3#5#
+#Multiplicación#4#6#
+#Palíndromo#radar#
+#Palíndromo#coche#
+Hola
+#Desconectar#
