@@ -1,153 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informe calificaciones</title>
-    <link href="css/reset.css" rel="stylesheet" />
-    <link href="css/estilos.css" rel="stylesheet" />
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
 
-    <style>
-      @media print {
-        /* reglas específicas para impresión */
+</head>
 
-        /* Márgenes y tamaño de página */
-        @page {
-          margin: 2cm;
-          size: A4;
-        }
+<body>
+<nav>
+<button onclick="generarInforme()">Generar informe</button>
+<button onclick="imprimir()">Guardar como PDF</button>
+</nav>
 
-        /* Cuerpo */
-        body {
-          color: #333;
-          font-size: 11pt;
-          line-height: 1.4;
-          font-family: Arial, sans-serif;
-        }
+<section class="reporte">
+  <h1>Informe de calificaciones</h1>
+  <p class="obs" id="fecha"></p>
 
-        /* Ocultar elementos innecesarios */
-        nav {
-          display: none;
-        }
+  <table>
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Matemáticas</th>
+        <th>Lengua</th>
+        <th>Historia</th>
+        <th>Ciencias</th>
+        <th>Promedio</th>
+      </tr>
+    </thead>
+    <tbody id="tabla"></tbody>
+  </table>
 
-        button {
-          display: none;
-        }
+  <footer class="estadisticas">
+    <aside class="caja">
+      <strong>Promedio por asignatura</strong>
+      <ul id="promediosAsignatura"></ul>
+    </aside>
 
-        /* Título */
-        h1 {
-          font-size: 18pt;
-          margin-bottom: 10pt;
-          border-bottom: 2px solid #333;
-          padding-bottom: 8pt;
-        }
+    <aside class="caja">
+      <strong>Observaciones</strong>
+      <p class="obs">
+        Informe generado automáticamente a partir de datos simulados usando JavaScript.
+      </p>
+    </aside>
+    <div class="cajagrafico"><canvas id="grafico"></canvas></div>
+  </footer>
+  
+</section>
 
-        /* Párrafo de fecha */
-        .obs {
-          font-size: 10pt;
-          color: #666;
-          margin-bottom: 15pt;
-        }
 
-        /* Tabla */
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-bottom: 20pt;
-          font-size: 10pt;
-        }
-
-        thead {
-          background-color: #e0e0e0;
-          font-weight: bold;
-        }
-
-        th,
-        td {
-          border: 1px solid #999;
-          padding: 6pt 8pt;
-          text-align: center;
-        }
-
-        th {
-          background-color: #d0d0d0;
-          font-weight: bold;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <nav>
-      <button id="generar-informe">Generar informe</button>
-      <button id="guardar-pdf">Guardar como PDF</button>
-    </nav>
-
-    <section class="reporte">
-      <h1>Informe de calificaciones</h1>
-      <p class="obs" id="fecha"></p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Alumno</th>
-            <th>Matemáticas</th>
-            <th>Lengua</th>
-            <th>Historia</th>
-            <th>Ciencias</th>
-            <th>Promedio</th>
-          </tr>
-        </thead>
-        <tbody id="tabla"></tbody>
-      </table>
-
-      <footer class="estadisticas">
-        <aside class="caja">
-          <strong>Promedio por asignatura</strong>
-          <ul id="promediosAsignatura"></ul>
-        </aside>
-
-        <aside class="caja">
-          <strong>Observaciones</strong>
-          <p class="obs">
-            Informe generado automáticamente a partir de datos simulados usando
-            JavaScript.
-          </p>
-        </aside>
-
-        <div class="cajagrafico">
-          <canvas id="grafico"></canvas>
-        </div>
-      </footer>
-    </section>
-
-    <script>
-      function imprimir(params) {
-        window.print();
-      }
-
-      document
-        .getElementById("guardar-pdf")
-        .addEventListener("click", imprimir);
-    </script>
 
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-      const lienzo = document.getElementById("grafico");
-      new Chart(lienzo, {
-        type: "bar",
-        data: {
-          labels: ["Matemáticas", "Lengua", "Historia", "Ciencias"],
-          datasets: [
-            {
-              label: "Promedio de asignaturas",
-              data: arrayPromedios,
-            },
-          ],
-        },
-      });
-    </script>
-  </body>
+
+
+
+
+
+
+
+
+
+
+    
+<script>
+/* const ctx = document.getElementById("grafico");
+
+new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: ["Matemáticas", "Lengua", "Historia", "Ciencias"],
+    datasets: [{
+      label: "Promedio por asignatura",
+      data: [7.2, 6.8, 7.5, 7.0]
+    }]
+  }
+}); */
+
+new Chart(document.getElementById("grafico"), {
+  type: "bar",
+  data: {
+    labels: ["Matemáticas", "Lengua", "Historia", "Ciencias"],
+    datasets: [{
+      label: "Promedio por asignatura",
+      data: promedios,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        min: 0,
+        max: 10,
+        ticks: {
+          stepSize: 1
+        }
+      }
+    }
+  }
+});
+
+</script>
+</body>
+
 </html>
