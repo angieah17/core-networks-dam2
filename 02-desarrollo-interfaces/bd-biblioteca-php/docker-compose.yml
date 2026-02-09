@@ -1,0 +1,36 @@
+services:
+  web:
+    build: .
+    container_name: biblio
+    ports:
+      - "6060:80"
+    volumes:
+      - ./src:/var/www/html:cached
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: biblio
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - biblio_db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "6070:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  biblio_db_data:
