@@ -8,6 +8,7 @@ Es el sistema que permite movernos entre pantallas una encima de otra, como si f
 import MenuAbajo from './componentes/MenuAbajo';
 import Libros from './pages/Libros';
 import Ayuda from './pages/Ayuda';
+import Descargas from './pages/Descargas';
 
 
 export default function App() {
@@ -29,6 +30,7 @@ function Principal() {
         <Estac.Navigator screenOptions={{ headerShown: false }}>
           <Estac.Screen name="Libros" component={Libros} />
           <Estac.Screen name="Ayuda" component={Ayuda} />
+          <Estac.Screen name="Descargas" component={Descargas} />
   
         </Estac.Navigator>
       </View>

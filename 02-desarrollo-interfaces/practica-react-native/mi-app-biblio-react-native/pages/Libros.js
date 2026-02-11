@@ -8,7 +8,7 @@ import {
   Platform, //componente que sirve para detectar la plataforma en la que se está ejecutando la aplicación (iOS, Android, web, etc.)
 } from 'react-native';
 
-const API_BASE = 'http://192.168.0.180:6060/api.php';
+const API_BASE = 'https://espacio199.com/biblioteca/api.php'; //Se actualiza la URL a la API web 
 
 export default function Libros() {
   const styles = getStyles();
@@ -107,5 +107,6 @@ const getStyles = () =>
     itemTitle: {
       fontSize: 16,
       fontWeight: 'bold',
+      textAlign: 'center',
     },
   });
