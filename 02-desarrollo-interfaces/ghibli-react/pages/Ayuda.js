@@ -88,7 +88,7 @@ export default function Ayuda() {
             description="Usa el botón de retroceso del dispositivo o el menú inferior para regresar a la pantalla anterior." />
           <List.Item
             title="Actualizar"
-            description="Si la lista soporta 'pull-to-refresh', arrastra hacia abajo para forzar la actualización de datos." />
+            description="Para actualizar, vuelve a abrir la pantalla de Películas o usa 'Reintentar' si aparece un error." />
         </List.Accordion>
         
 
