@@ -105,7 +105,7 @@ export default function Ayuda() {
 const styles = StyleSheet.create({
   full: { flex: 1, backgroundColor: theme.colors.background },
   container: { padding: 16, paddingBottom: 40 },
-  title: { fontSize: 24, fontWeight: '700', marginBottom: 8, fontFamily: 'JosefinSans_200ExtraLight', color: theme.colors.text },
+  title: { fontSize: theme.typography.title, fontWeight: theme.typography.weightBold, marginBottom: 8, fontFamily: theme.fonts.medium.fontFamily, color: theme.colors.onSurface },
   footer: { marginTop: 16 },
   footerText: { color: theme.colors.text, fontSize: 14 }
 });

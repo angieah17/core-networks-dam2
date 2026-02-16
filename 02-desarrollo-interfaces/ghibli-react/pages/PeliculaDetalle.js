@@ -42,7 +42,7 @@ export default function PeliculaDetalle({ route, navigation }) {
 const styles = StyleSheet.create({
   full: { flex: 1, backgroundColor: theme.colors.background },
   screen: { padding: 14 },
-  title: { fontSize: 24, fontWeight: '700', marginBottom: 6, color: theme.colors.text, fontFamily: 'JosefinSans_200ExtraLight' },
-  subtitle: { fontStyle: 'italic', marginBottom: 8, color: theme.colors.placeholder },
+  title: { fontSize: theme.typography.title, fontWeight: theme.typography.weightBold, marginBottom: 6, color: theme.colors.onSurface, fontFamily: theme.fonts.medium.fontFamily },
+  subtitle: { fontSize: theme.typography.subtitle, fontStyle: 'italic', marginBottom: 8, color: theme.colors.placeholder },
   description: { marginTop: 10, color: theme.colors.text, lineHeight: 20 },
 });

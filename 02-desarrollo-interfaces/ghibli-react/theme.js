@@ -19,6 +19,16 @@ const theme = {
     light: { fontFamily: 'JosefinSans_100Thin', fontWeight: '300' },
     thin: { fontFamily: 'JosefinSans_100Thin', fontWeight: '100' },
   },
+  typography: {
+    title: 26,
+    titleLarge: 28,
+    subtitle: 18,
+    body: 14,
+    caption: 12,
+    lineHeight: 20,
+    weightBold: '700',
+    weightMedium: '500',
+  },
 };
 
 export default theme;

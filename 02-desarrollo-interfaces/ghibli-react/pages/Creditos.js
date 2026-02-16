@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   full: { flex: 1, backgroundColor: theme.colors.background },
   container: { padding: 16, paddingBottom: 40 },
   card: { marginBottom: 12, borderRadius: 8, overflow: 'hidden' },
-  title: { fontSize: 20, fontWeight: '700', marginBottom: 8, color: theme.colors.text, fontFamily: 'JosefinSans_200ExtraLight' },
+  title: { fontSize: theme.typography.title, fontWeight: theme.typography.weightBold, marginBottom: 8, color: theme.colors.onSurface, fontFamily: theme.fonts.medium.fontFamily },
   paragraph: { marginTop: 8, marginBottom: 8, lineHeight: 20, color: theme.colors.text },
   button: { marginTop: 12 },
 });

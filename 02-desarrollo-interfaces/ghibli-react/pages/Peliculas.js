@@ -102,7 +102,7 @@ export default function Peliculas({ navigation }) {
 const styles = StyleSheet.create({
   screen: { padding: 16, backgroundColor: theme.colors.background },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  title: { fontSize: 26, fontWeight: '700', marginBottom: 12, color: theme.colors.text, fontFamily: 'JosefinSans_200ExtraLight' },
+  title: { fontSize: theme.typography.title, fontWeight: theme.typography.weightBold, marginBottom: 12, color: theme.colors.onSurface, fontFamily: theme.fonts.medium.fontFamily },
   error: { color: theme.colors.error, padding: 8 },
   list: { padding: 12 },
   card: { marginBottom: 14, borderRadius: 8, overflow: 'hidden' },
